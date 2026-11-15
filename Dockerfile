@@ -3,10 +3,16 @@ FROM ${BASE_IMAGE}
 
 ARG BUILD_DATE
 ARG VERSION=0.2.0
+ARG VCS_REF
 LABEL org.opencontainers.image.title="WireGuard GUI" \
+      org.opencontainers.image.description="Interfaz web ligera para administrar WireGuard sobre la imagen de LinuxServer.io" \
       org.opencontainers.image.version="${VERSION}" \
       org.opencontainers.image.created="${BUILD_DATE}" \
-      org.opencontainers.image.source="https://example.invalid/wireguard-gui"
+      org.opencontainers.image.revision="${VCS_REF}" \
+      org.opencontainers.image.source="https://github.com/aguilarbucket/Wireguard-GUI" \
+      org.opencontainers.image.url="https://github.com/aguilarbucket/Wireguard-GUI" \
+      org.opencontainers.image.documentation="https://github.com/aguilarbucket/Wireguard-GUI#readme" \
+      org.opencontainers.image.licenses="GPL-3.0-only"
 
 RUN apk add --no-cache curl python3 py3-pip py3-virtualenv sudo \
     && python3 -m venv /opt/wireguard-gui/venv

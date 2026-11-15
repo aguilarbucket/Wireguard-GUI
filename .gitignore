@@ -26,4 +26,7 @@ test-results/
 *.p12
 *.pfx
 *.qr
+*.db
+*.sqlite
+*.sqlite3
 wireguard-gui-backup*

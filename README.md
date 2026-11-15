@@ -53,6 +53,7 @@ Edite `.env` antes del primer arranque. El archivo real está excluido de Git po
 
 | Variable | Valor recomendado | Descripción |
 | --- | --- | --- |
+| `IMAGE_TAG` | `0.2.0` | Etiqueta de Docker Hub. Fije una versión validada en producción; evite depender de `latest`. |
 | `ADMIN_PASSWORD` | frase única de 16+ caracteres | Contraseña inicial de la GUI. Sólo se utiliza para inicializar un volumen nuevo. |
 | `SERVER_ENDPOINT` | `vpn.example.com` | IP pública o nombre DNS público del servidor, sin `http://`, `https://`, ruta ni puerto. |
 | `SERVER_PORT` | `51820` | Puerto UDP publicado por Docker, abierto en el firewall y reenviado por el router. |
@@ -70,6 +71,7 @@ Edite `.env` antes del primer arranque. El archivo real está excluido de Git po
 Ejemplo mínimo para full tunnel:
 
 ```dotenv
+IMAGE_TAG=0.2.0
 ADMIN_PASSWORD=reemplace-por-una-frase-larga-y-unica
 SERVER_ENDPOINT=vpn.example.com
 SERVER_PORT=51820
@@ -101,7 +103,23 @@ Para aceptar clientes desde Internet deben cumplirse todas estas condiciones:
 
 El registro de Cloudflare usado como endpoint debe estar en modo **DNS only** (nube gris). Un Cloudflare Tunnel HTTP estándar conoce la IP del host, pero no publica el tráfico UDP nativo de WireGuard. Para este despliegue siguen siendo necesarios DNS público, reenvío UDP y ausencia de CGNAT.
 
-### 4. Construir e iniciar
+### 4. Iniciar con la imagen de Docker Hub
+
+La opción recomendada para una instalación normal descarga la imagen publicada y evita construirla localmente:
+
+```bash
+docker compose pull wireguard-gui
+docker compose up -d --no-build
+docker compose ps
+docker compose logs --no-log-prefix wireguard-gui
+docker exec wireguard-gui wg show
+```
+
+Imagen: [`alejandroromeroa/wireguard-gui`](https://hub.docker.com/r/alejandroromeroa/wireguard-gui). Use una etiqueta versionada como `0.2.0`; `latest` se ofrece por comodidad, pero puede cambiar.
+
+### 5. Construir localmente
+
+Para auditar o modificar el código, construya la imagen desde este repositorio:
 
 ```bash
 docker compose build
@@ -126,7 +144,7 @@ docker compose restart wireguard-gui
 docker compose stop
 docker compose down
 
-# Reconstruir después de actualizar el código o .env
+# Reconstruir después de actualizar el código
 docker compose up -d --build --force-recreate
 ```
 

@@ -6,7 +6,8 @@ services:
       context: .
       args:
         BASE_IMAGE: lscr.io/linuxserver/wireguard:latest
-    image: wireguard-gui:0.2.0
+        VERSION: ${IMAGE_TAG:-0.2.0}
+    image: alejandroromeroa/wireguard-gui:${IMAGE_TAG:-0.2.0}
     container_name: wireguard-gui
     restart: unless-stopped
     cap_add:

@@ -2,6 +2,8 @@
 .gitignore
 .env
 .env.*
+**/.env
+**/.env.*
 .envrc
 *.local
 .venv
@@ -15,8 +17,16 @@ docs
 tests
 secrets
 *.log
+logs
+test-results
 *.conf
+*.mobileconfig
 *.key
 *.pem
 *.p12
 *.pfx
+*.qr
+*.db
+*.sqlite
+*.sqlite3
+wireguard-gui-backup*
