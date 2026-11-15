@@ -4,6 +4,15 @@ Interfaz web ligera para administrar un servidor WireGuard sobre la imagen de [L
 
 > **Canales actuales: `latest` y `beta`**. Ambos contienen la compilación mitigada para `linux/amd64`. `alpha` se conserva únicamente como referencia histórica y no se recomienda para despliegues.
 
+### Estado de seguridad verificado el 2026-11-15
+
+- `beta` / `latest`: **0 críticas, 3 altas, 3 medias y 1 baja** en 110 paquetes; además, 5 entradas OpenSSL todavía sin severidad asignada.
+- `alpha`: compilación histórica con **11 críticas, 51 altas, 45 medias y 11 bajas**. No debe utilizarse en producción.
+- Digest mitigado: `sha256:588a5bfbbc105612dc320e3f558b5a5145efd56601bb337d9b1d57e9ef0a31d5`.
+- La imagen incluye SBOM y provenance. Se eliminaron CoreDNS y herramientas de construcción del runtime.
+
+Los tres hallazgos altos residuales corresponden a musl, sudo y sqlite. Su aplicabilidad, las versiones verificadas y las medidas compensatorias están documentadas en el [reconocimiento de CVE y mitigaciones](https://github.com/aguilarbucket/Wireguard-GUI/blob/main/docs/CVE-ACKNOWLEDGEMENTS.md). Un CVE reconocido continúa bajo seguimiento; no significa que haya sido ocultado ni corregido.
+
 ## Inicio rápido
 
 1. Cree una carpeta vacía.
@@ -181,7 +190,7 @@ docker compose stop wireguard-gui
 docker compose start wireguard-gui
 ```
 
-Para actualizar el canal alpha:
+Para actualizar el canal configurado:
 
 ```bash
 docker compose pull
@@ -193,6 +202,7 @@ docker compose up -d --no-build
 - La administración se publica sólo en `127.0.0.1` por defecto.
 - El contenedor utiliza `NET_ADMIN`, pero no requiere `privileged`, `SYS_ADMIN` ni el socket Docker.
 - `.env`, `./config`, claves y perfiles de clientes no forman parte de la imagen.
+- CVE reconocidos y mitigaciones: [docs/CVE-ACKNOWLEDGEMENTS.md](https://github.com/aguilarbucket/Wireguard-GUI/blob/main/docs/CVE-ACKNOWLEDGEMENTS.md).
 - Código, documentación completa y reporte técnico: [github.com/aguilarbucket/Wireguard-GUI](https://github.com/aguilarbucket/Wireguard-GUI).
 - Base técnica: [LinuxServer/docker-wireguard](https://github.com/linuxserver/docker-wireguard).
 - Referencia funcional y de experiencia: [wg-easy](https://github.com/wg-easy/wg-easy).

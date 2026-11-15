@@ -4,6 +4,8 @@ Interfaz web ligera y autocontenida para administrar un servidor WireGuard sobre
 
 > Estado: candidata técnica. La construcción, el arranque, la interfaz `wg0` y una conexión externa desde un cliente iOS sobre red móvil fueron verificados en Docker Desktop/WSL2. Valide igualmente el comportamiento en su propio router, proveedor de Internet y sistema operativo antes de usarlo en producción.
 
+> Seguridad de la imagen: `beta` y `latest` contienen la compilación mitigada; `alpha` es una referencia histórica con vulnerabilidades conocidas y no debe desplegarse. Consulte el [reconocimiento de CVE y mitigaciones](docs/CVE-ACKNOWLEDGEMENTS.md).
+
 ## Arquitectura
 
 - `lscr.io/linuxserver/wireguard` proporciona WireGuard, `wg-quick`, iptables y s6-overlay.
@@ -248,7 +250,7 @@ docker compose ps
 docker exec wireguard-gui wg show
 ```
 
-Evite actualizaciones automáticas sin supervisión. Durante las pruebas, `alpha` es una etiqueta móvil; para despliegues estables use una etiqueta numerada o un digest que haya validado.
+Evite actualizaciones automáticas sin supervisión. `latest` y `beta` son etiquetas móviles; para despliegues críticos use una etiqueta numerada o un digest que haya validado. No use `alpha`: se conserva como referencia histórica vulnerable.
 
 ### Backup y restauración
 
