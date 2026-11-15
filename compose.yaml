@@ -41,25 +41,3 @@ services:
       timeout: 5s
       retries: 3
       start_period: 20s
-
-  cloudflare-ddns:
-    image: favonia/cloudflare-ddns:1.18.0
-    container_name: cloudflare-ddns
-    profiles: ["ddns"]
-    restart: unless-stopped
-    read_only: true
-    cap_drop:
-      - ALL
-    security_opt:
-      - no-new-privileges:true
-    environment:
-      DOMAINS: ${DDNS_DOMAIN:-vpn.example.com}
-      PROXIED: "false"
-      IP6_PROVIDER: none
-      CLOUDFLARE_API_TOKEN_FILE: /run/secrets/cloudflare_api_token
-    secrets:
-      - cloudflare_api_token
-
-secrets:
-  cloudflare_api_token:
-    file: ./secrets/cloudflare_api_token
