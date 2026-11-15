@@ -2,7 +2,7 @@ name: wireguard-gui
 
 services:
   wireguard-gui:
-    image: alejandroromeroa/wireguard-gui:latest
+    image: alejandroromeroa/wireguard-gui:${IMAGE_TAG:-alpha}
     container_name: wireguard-gui
     restart: unless-stopped
 

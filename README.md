@@ -72,7 +72,7 @@ Edite `.env` antes del primer arranque. El archivo real está excluido de Git po
 
 | Variable | Valor recomendado | Descripción |
 | --- | --- | --- |
-| `IMAGE_TAG` | `0.2.0` | Etiqueta de Docker Hub. Fije una versión validada en producción; evite depender de `latest`. |
+| `IMAGE_TAG` | `alpha` | Canal público de pruebas. Fije una versión numerada cuando exista una versión estable. |
 | `ADMIN_PASSWORD` | frase única de 16+ caracteres | Contraseña inicial de la GUI. Sólo se utiliza para inicializar un volumen nuevo. |
 | `SERVER_ENDPOINT` | `vpn.example.com` | IP pública o nombre DNS público del servidor, sin `http://`, `https://`, ruta ni puerto. |
 | `SERVER_PORT` | `51820` | Puerto UDP publicado por Docker, abierto en el firewall y reenviado por el router. |
@@ -85,12 +85,11 @@ Edite `.env` antes del primer arranque. El archivo real está excluido de Git po
 | `TZ` | `America/Santiago` | Zona horaria del contenedor. |
 | `SESSION_COOKIE_SECURE` | `false` local; `true` con HTTPS | Evita enviar la cookie por HTTP cuando la GUI está detrás de TLS. |
 | `TRUSTED_PROXY_COUNT` | `0` local; normalmente `1` con proxy | Número exacto de proxies inversos confiables. |
-| `DDNS_DOMAIN` | `vpn.example.com` | Nombre que actualizará el perfil opcional de Cloudflare DDNS. |
 
 Ejemplo mínimo para full tunnel:
 
 ```dotenv
-IMAGE_TAG=0.2.0
+IMAGE_TAG=alpha
 ADMIN_PASSWORD=reemplace-por-una-frase-larga-y-unica
 SERVER_ENDPOINT=vpn.example.com
 SERVER_PORT=51820
@@ -104,7 +103,6 @@ PUID=1000
 PGID=1000
 SESSION_COOKIE_SECURE=false
 TRUSTED_PROXY_COUNT=0
-DDNS_DOMAIN=vpn.example.com
 ```
 
 No agregue `::/0` hasta haber configurado y validado IPv6 de extremo a extremo; el despliegue predeterminado está preparado para IPv4.
@@ -120,7 +118,7 @@ Para aceptar clientes desde Internet deben cumplirse todas estas condiciones:
 5. Configure `SERVER_ENDPOINT` con la IP pública o, preferiblemente, un nombre DNS estable. Si la IP cambia, use DDNS.
 6. Pruebe desde una red externa, por ejemplo datos móviles; una prueba TCP o desde la misma LAN puede producir un resultado engañoso.
 
-El registro de Cloudflare usado como endpoint debe estar en modo **DNS only** (nube gris). Un Cloudflare Tunnel HTTP estándar conoce la IP del host, pero no publica el tráfico UDP nativo de WireGuard. Para este despliegue siguen siendo necesarios DNS público, reenvío UDP y ausencia de CGNAT.
+Este Compose no incluye un actualizador DDNS. Si la IP pública cambia, configure el servicio DDNS en el router o mediante una herramienta externa. WireGuard necesita que el nombre público resuelva a la IP vigente, además del reenvío UDP y ausencia de CGNAT.
 
 ### 4. Iniciar con la imagen de Docker Hub
 
@@ -134,15 +132,16 @@ docker compose logs --no-log-prefix wireguard-gui
 docker exec wireguard-gui wg show
 ```
 
-Imagen: [`alejandroromeroa/wireguard-gui`](https://hub.docker.com/r/alejandroromeroa/wireguard-gui). Use una etiqueta versionada como `0.2.0`; `latest` se ofrece por comodidad, pero puede cambiar.
+Imagen: [`alejandroromeroa/wireguard-gui`](https://hub.docker.com/r/alejandroromeroa/wireguard-gui). Mientras continúe la validación, `IMAGE_TAG=alpha` selecciona el canal de pruebas.
 
 ### 5. Construir localmente
 
 Para auditar o modificar el código, construya la imagen desde este repositorio:
 
 ```bash
-docker compose build
-docker compose up -d
+docker build -t alejandroromeroa/wireguard-gui:local .
+# Cambie temporalmente IMAGE_TAG=local en .env.
+docker compose up -d --no-build
 docker compose ps
 docker compose logs --no-log-prefix wireguard-gui
 docker exec wireguard-gui wg show
@@ -163,8 +162,9 @@ docker compose restart wireguard-gui
 docker compose stop
 docker compose down
 
-# Reconstruir después de actualizar el código
-docker compose up -d --build --force-recreate
+# Actualizar el canal configurado en IMAGE_TAG
+docker compose pull
+docker compose up -d --no-build
 ```
 
 ### Docker Desktop en Windows
@@ -177,19 +177,6 @@ docker compose ps
 ```
 
 Docker Desktop debe usar contenedores Linux y WSL2. Si no llegan paquetes UDP, verifique primero el reenvío del router, la IP LAN actual del equipo, el firewall de Windows y que Docker publique `0.0.0.0:51820/udp` con `docker compose ps`. Evite mantener reglas amplias o temporales de firewall después de la prueba.
-
-### Cloudflare DDNS para una IP pública dinámica
-
-El perfil opcional `ddns` mantiene un registro `A` DNS-only actualizado mediante `favonia/cloudflare-ddns`. Cree en Cloudflare un token basado en **Edit Zone DNS**, restringido únicamente a la zona requerida, copie `secrets/cloudflare_api_token.example` como `secrets/cloudflare_api_token` y reemplace el placeholder por el token (sin espacios ni salto de línea adicional). Nunca use la Global API Key.
-
-```powershell
-New-Item -ItemType Directory -Force secrets
-Set-Content -NoNewline secrets/cloudflare_api_token 'PEGUE-AQUI-EL-TOKEN-LIMITADO'
-docker compose --profile ddns up -d
-docker compose logs cloudflare-ddns
-```
-
-`DDNS_DOMAIN` debe contener el hostname real, por ejemplo `vpn.example.com`, y el registro debe permanecer sin proxy (nube gris), porque WireGuard usa UDP. Cuando el log confirme la actualización, configure el mismo hostname como endpoint de la GUI; el router todavía debe redirigir UDP 51820 hacia el host.
 
 La primera ejecución exige `ADMIN_PASSWORD` de al menos 12 caracteres, genera claves nuevas, crea `wg0` y comienza con cero clientes. En reinicios posteriores no reemplaza claves ni contraseña aunque cambie `ADMIN_PASSWORD` en `.env`.
 
@@ -243,7 +230,7 @@ No cambie la subred mientras existan clientes; la API lo impide para evitar reas
 - Use una contraseña administrativa única, actualizaciones planificadas y copias de seguridad cifradas de `./config`.
 - Reserve la IP LAN del host y documente el puerto UDP, el registro DNS y la regla NAT.
 - Cree un peer por dispositivo, revoque equipos perdidos y revise periódicamente los handshakes.
-- No publique `.env`, `./config`, archivos `.conf`, códigos QR, claves ni tokens DDNS.
+- No publique `.env`, `./config`, archivos `.conf`, códigos QR ni claves.
 - Fije una etiqueta o digest de imagen validado antes de un despliegue crítico; pruebe las actualizaciones antes de aplicarlas.
 - Exponga sólo `NET_ADMIN`; no añada `privileged`, el socket Docker ni capabilities adicionales sin una necesidad comprobada.
 
@@ -251,17 +238,17 @@ No cambie la subred mientras existan clientes; la API lo impide para evitar reas
 
 1. Realice un backup.
 2. Revise las notas de LinuxServer y de WireGuard GUI.
-3. Construya la nueva imagen y ejecute las pruebas.
+3. Descargue la nueva imagen y revise las notas de la versión.
 4. Recree el contenedor conservando `./config`.
 
 ```bash
-docker compose build --pull
-docker compose up -d
+docker compose pull
+docker compose up -d --no-build
 docker compose ps
 docker exec wireguard-gui wg show
 ```
 
-Evite actualizadores automáticos sin supervisión: la etiqueta base `latest` hace reproducible el código propio, pero no congela el sistema base. Para despliegues regulados, reemplace `BASE_IMAGE` por una etiqueta o digest de LinuxServer que haya validado.
+Evite actualizaciones automáticas sin supervisión. Durante las pruebas, `alpha` es una etiqueta móvil; para despliegues estables use una etiqueta numerada o un digest que haya validado.
 
 ### Backup y restauración
 
@@ -304,7 +291,7 @@ En un host Linux dedicado:
 - **El contenedor no inicia:** ejecute `docker compose config` para detectar variables faltantes y luego `docker compose logs wireguard-gui`. En un volumen nuevo, `ADMIN_PASSWORD` debe tener al menos 12 caracteres.
 - **`wg0` no sube:** revise `docker compose logs`, la disponibilidad de WireGuard en el host, `NET_ADMIN` y los permisos de `./config`. En Linux confirme el módulo con `sudo modprobe wireguard`.
 - **La UI funciona pero no hay handshake:** confirme que el cliente usa el DNS/IP y puerto correctos, que el registro DNS resuelve a la IP pública actual, que el router reenvía UDP, que no existe CGNAT y que el reloj de ambos equipos es correcto.
-- **Funcionó y dejó de funcionar:** compruebe si cambió la IP pública, la IP LAN del host o la concesión DHCP. Revise el actualizador DDNS y recree el cliente si su configuración conserva un endpoint anterior.
+- **Funcionó y dejó de funcionar:** compruebe si cambió la IP pública, la IP LAN del host o la concesión DHCP. Revise el DDNS configurado externamente y recree el cliente si su configuración conserva un endpoint anterior.
 - **Hay handshake pero no navega:** verifique `CLIENT_ALLOWED_IPS=0.0.0.0/0`, DNS del peer, `net.ipv4.ip_forward`, las reglas FORWARD/NAT y posibles solapamientos entre `VPN_SUBNET`, LAN y red del cliente.
 - **Navega por IP pero no por nombre:** cambie temporalmente `PEER_DNS` por un resolvedor accesible como `1.1.1.1` o `9.9.9.9`, genere/actualice el peer y vuelva a importar la configuración.
 - **Algunas páginas cargan y otras no:** sospeche de MTU. Pruebe de forma controlada `WG_MTU=1420`, `1380` o `1280`, recree el contenedor y regenere la configuración del cliente.

@@ -11,9 +11,7 @@ __pycache__/
 htmlcov/
 config/
 dist/
-secrets/*
-!secrets/.gitkeep
-!secrets/*.example
+secrets/
 
 # Artefactos locales que pueden contener IPs, endpoints o claves.
 *.log
