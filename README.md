@@ -25,6 +25,25 @@ Las claves privadas deben existir en el volumen para regenerar configuraciones d
 `NET_ADMIN` es la única capability concedida al contenedor: permite crear `wg0`, configurar rutas y NAT. Gunicorn corre como `abc`; una regla sudo limitada permite únicamente leer `wg0`, ejecutar `wg-quick strip` sobre `wg0.conf` y sincronizar un archivo runtime fijo. No se usa `privileged`, `SYS_ADMIN`, `SYS_MODULE` ni el socket Docker.
 
 ## Ejecución con Docker Compose
+Mi forma favorita es: 
+
+1) Crear una carpeta
+2) Copiar el compose.yaml de ejemplo del GIT.
+3) Copiar el .env y modificar los valores según corresponda a su caso. 
+4) Abrir CMD dentro de la carpeta con los archivos.
+5) ejecutar: docker compose -f compose.yaml up -d
+6) Resultado: 
+[+] up 2/2
+ ✔ Network wireguard-gui_default Created                                                                            0.0s
+ ✔ Container wireguard-gui       Started
+
+ Ir a la interfaz grafica,http://127.0.0.1:51821
+Iniciar sesion con la contraseña establecida en el .env según su criterio.
+
+Generar un cliente nuevo via QR, lo escanea con su cliente wireguard desde su movil IOS o Android. 
+o si es PC (Windows requiere cliente Wireguard)(Linux, al menos Distro Ubuntu viene incluido el perfil VPN para importar el archivo .conf) - Baja el archivo #nombrecliente.conf
+
+Y estas listo para conectarte a tu VPN, bien sea que estes en una cafeteria, o un aeropuerto, o algun lugar donde tus datos sensibles no se sientan muy seguro que digamos. 
 
 ### 1. Obtener el proyecto
 
