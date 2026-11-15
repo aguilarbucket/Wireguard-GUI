@@ -1,0 +1,11 @@
+#!/usr/bin/with-contenv sh
+set -eu
+
+if [ -n "${PEERS:-}" ]; then
+  echo "[wggui] ERROR: PEERS no debe estar definido; causaría regeneraciones destructivas." >&2
+  exit 1
+fi
+
+cd /opt/wireguard-gui
+/opt/wireguard-gui/venv/bin/python -m wggui.bootstrap
+chown -R abc:abc /config/wggui /config/wg_confs

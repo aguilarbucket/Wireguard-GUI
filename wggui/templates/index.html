@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{% block body %}
+<header class="topbar">
+  <a class="brand" href="/" aria-label="WireGuard GUI, inicio"><span>W</span> WireGuard GUI</a>
+  <div class="top-actions">
+    <span id="server-pill" class="pill neutral">Consultando…</span>
+    <button id="settings-open" class="button secondary" type="button">Configuración</button>
+    <form method="post" action="{{ url_for('auth.logout') }}">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <button class="button ghost" type="submit">Salir</button>
+    </form>
+  </div>
+</header>
+
+<main class="container">
+  <section class="hero">
+    <div>
+      <p class="eyebrow">Panel del servidor</p>
+      <h1>Tu red privada, de un vistazo.</h1>
+      <p class="muted">Un handshake reciente indica actividad, no una conexión permanente.</p>
+    </div>
+    <button id="peer-open" type="button">+ Nuevo cliente</button>
+  </section>
+
+  <div id="notice" class="alert hidden" role="status" aria-live="polite"></div>
+
+  <section class="metrics" aria-label="Resumen">
+    <article><span>Interfaz</span><strong id="metric-interface">—</strong></article>
+    <article><span>Clientes</span><strong id="metric-total">—</strong></article>
+    <article><span>Habilitados</span><strong id="metric-enabled">—</strong></article>
+    <article><span>Actividad reciente</span><strong id="metric-recent">—</strong></article>
+    <article><span>Tráfico total</span><strong id="metric-traffic">—</strong></article>
+  </section>
+
+  <section class="panel">
+    <div class="panel-heading">
+      <div><p class="eyebrow">Inventario</p><h2>Clientes</h2></div>
+      <button id="refresh" class="button secondary" type="button">Actualizar</button>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Cliente</th><th>Dirección</th><th>Estado</th><th>Última actividad</th><th>Tráfico</th><th><span class="sr-only">Acciones</span></th></tr></thead>
+        <tbody id="peers-body"></tbody>
+      </table>
+      <div id="empty" class="empty hidden"><strong>Aún no hay clientes.</strong><span>Crea el primero para obtener su configuración y QR.</span></div>
+    </div>
+  </section>
+</main>
+
+<dialog id="peer-dialog">
+  <form id="peer-form" class="dialog-card">
+    <div class="dialog-heading"><div><p id="peer-eyebrow" class="eyebrow">Nueva identidad</p><h2 id="peer-dialog-title">Crear cliente</h2></div><button class="icon-button close-dialog" type="button" aria-label="Cerrar">×</button></div>
+    <label for="peer-name">Nombre</label><input id="peer-name" name="name" maxlength="48" required placeholder="Teléfono personal">
+    <label for="peer-dns">DNS <span class="optional">(opcional; usa el predeterminado)</span></label><input id="peer-dns" name="dns" placeholder="1.1.1.1">
+    <label for="peer-allowed">AllowedIPs <span class="optional">(opcional)</span></label><input id="peer-allowed" name="allowed_ips" placeholder="0.0.0.0/0">
+    <label for="peer-keepalive">PersistentKeepalive</label><input id="peer-keepalive" name="persistent_keepalive" type="number" min="0" max="65535" value="25">
+    <div class="dialog-actions"><button class="button secondary close-dialog" type="button">Cancelar</button><button id="peer-submit" type="submit">Crear cliente</button></div>
+  </form>
+</dialog>
+
+<dialog id="settings-dialog">
+  <form id="settings-form" class="dialog-card wide">
+    <div class="dialog-heading"><div><p class="eyebrow">Servidor</p><h2>Configuración</h2></div><button class="icon-button close-dialog" type="button" aria-label="Cerrar">×</button></div>
+    <div class="form-grid">
+      <label>Endpoint público<input name="endpoint" required></label>
+      <label>Puerto UDP<input name="listen_port" type="number" min="1" max="65535" required></label>
+      <label>Subred VPN<input name="subnet" required></label>
+      <label>DNS predeterminado<input name="dns" required></label>
+      <label>AllowedIPs predeterminado<input name="allowed_ips" required></label>
+      <label>MTU <span class="optional">(vacío = automático)</span><input name="mtu" type="number" min="576" max="9000"></label>
+    </div>
+    <p class="hint">Endpoint, DNS y AllowedIPs se aplican en caliente. Puerto, subred y MTU requieren actualizar .env cuando corresponda y recrear el contenedor.</p>
+    <div class="dialog-actions"><button id="password-open" class="button ghost" type="button">Cambiar contraseña</button><button class="button secondary close-dialog" type="button">Cancelar</button><button type="submit">Guardar</button></div>
+  </form>
+</dialog>
+
+<dialog id="password-dialog">
+  <form id="password-form" class="dialog-card">
+    <div class="dialog-heading"><div><p class="eyebrow">Seguridad</p><h2>Cambiar contraseña</h2></div><button class="icon-button close-dialog" type="button" aria-label="Cerrar">×</button></div>
+    <label>Contraseña actual<input name="current_password" type="password" autocomplete="current-password" required></label>
+    <label>Nueva contraseña<input name="new_password" type="password" minlength="12" autocomplete="new-password" required></label>
+    <p class="hint">Al guardar se invalidarán todas las demás sesiones administrativas.</p>
+    <div class="dialog-actions"><button class="button secondary close-dialog" type="button">Cancelar</button><button type="submit">Actualizar</button></div>
+  </form>
+</dialog>
+
+<dialog id="qr-dialog">
+  <div class="dialog-card qr-card">
+    <div class="dialog-heading"><div><p class="eyebrow">Configuración móvil</p><h2 id="qr-title">Código QR</h2></div><button class="icon-button close-dialog" type="button" aria-label="Cerrar">×</button></div>
+    <img id="qr-image" alt="Código QR de configuración WireGuard">
+    <p class="hint">Este QR contiene una clave privada. No lo compartas ni captures la pantalla.</p>
+  </div>
+</dialog>
+
+<meta name="csrf-token" content="{{ csrf_token() }}">
+<script src="{{ url_for('static', filename='app.js') }}" defer></script>
+{% endblock %}

@@ -1,0 +1,4 @@
+Defaults:abc !requiretty
+abc ALL=(root) NOPASSWD: /usr/bin/wg show wg0 dump
+abc ALL=(root) NOPASSWD: /usr/bin/wg syncconf wg0 /config/wggui/runtime.conf
+abc ALL=(root) NOPASSWD: /usr/local/bin/wg-quick strip /config/wg_confs/wg0.conf
