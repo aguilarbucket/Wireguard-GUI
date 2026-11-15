@@ -72,7 +72,7 @@ Edite `.env` antes del primer arranque. El archivo real está excluido de Git po
 
 | Variable | Valor recomendado | Descripción |
 | --- | --- | --- |
-| `IMAGE_TAG` | `alpha` | Canal público de pruebas. Fije una versión numerada cuando exista una versión estable. |
+| `IMAGE_TAG` | `latest` | Canal recomendado. Use `beta` para validar novedades; `alpha` queda sólo como referencia histórica. |
 | `ADMIN_PASSWORD` | frase única de 16+ caracteres | Contraseña inicial de la GUI. Sólo se utiliza para inicializar un volumen nuevo. |
 | `SERVER_ENDPOINT` | `vpn.example.com` | IP pública o nombre DNS público del servidor, sin `http://`, `https://`, ruta ni puerto. |
 | `SERVER_PORT` | `51820` | Puerto UDP publicado por Docker, abierto en el firewall y reenviado por el router. |
@@ -89,7 +89,7 @@ Edite `.env` antes del primer arranque. El archivo real está excluido de Git po
 Ejemplo mínimo para full tunnel:
 
 ```dotenv
-IMAGE_TAG=alpha
+IMAGE_TAG=latest
 ADMIN_PASSWORD=reemplace-por-una-frase-larga-y-unica
 SERVER_ENDPOINT=vpn.example.com
 SERVER_PORT=51820
@@ -132,7 +132,7 @@ docker compose logs --no-log-prefix wireguard-gui
 docker exec wireguard-gui wg show
 ```
 
-Imagen: [`alejandroromeroa/wireguard-gui`](https://hub.docker.com/r/alejandroromeroa/wireguard-gui). Mientras continúe la validación, `IMAGE_TAG=alpha` selecciona el canal de pruebas.
+Imagen: [`alejandroromeroa/wireguard-gui`](https://hub.docker.com/r/alejandroromeroa/wireguard-gui). `IMAGE_TAG=latest` selecciona el canal recomendado y `IMAGE_TAG=beta` permite validar la misma compilación antes de futuras promociones. `alpha` se conserva únicamente como referencia histórica y no se recomienda para despliegues.
 
 ### 5. Construir localmente
 

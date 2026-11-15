@@ -11,7 +11,7 @@ RUN /opt/wireguard-gui/venv/bin/pip install --no-cache-dir -r /opt/wireguard-gui
 FROM ${BASE_IMAGE}
 
 ARG BUILD_DATE
-ARG VERSION=0.2.0-alpha
+ARG VERSION=0.2.0-beta
 ARG VCS_REF
 LABEL org.opencontainers.image.title="WireGuard GUI" \
       org.opencontainers.image.description="Interfaz web ligera para administrar WireGuard sobre la imagen de LinuxServer.io" \

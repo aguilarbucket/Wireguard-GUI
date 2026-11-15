@@ -2,7 +2,7 @@
 
 Interfaz web ligera para administrar un servidor WireGuard sobre la imagen de [LinuxServer.io](https://github.com/linuxserver/docker-wireguard), con una experiencia inspirada en [wg-easy](https://github.com/wg-easy/wg-easy).
 
-> **Canal actual: `alpha`**. Úselo para pruebas controladas. La imagen publicada actualmente es `linux/amd64`; no la considere estable hasta que finalice el periodo de validación.
+> **Canales actuales: `latest` y `beta`**. Ambos contienen la compilación mitigada para `linux/amd64`. `alpha` se conserva únicamente como referencia histórica y no se recomienda para despliegues.
 
 ## Inicio rápido
 
@@ -19,7 +19,7 @@ name: wireguard-gui
 
 services:
   wireguard-gui:
-    image: alejandroromeroa/wireguard-gui:${IMAGE_TAG:-alpha}
+    image: alejandroromeroa/wireguard-gui:${IMAGE_TAG:-latest}
     container_name: wireguard-gui
     restart: unless-stopped
     cap_add:
@@ -56,8 +56,8 @@ services:
 ### `.env`
 
 ```dotenv
-# Canal de pruebas publicado en Docker Hub.
-IMAGE_TAG=alpha
+# Canal recomendado. Use beta para validar novedades antes de latest.
+IMAGE_TAG=latest
 
 # Obligatorio: use una frase única de al menos 12 caracteres; se recomiendan 16 o más.
 ADMIN_PASSWORD=CAMBIAR-por-una-frase-larga-y-unica
@@ -99,7 +99,7 @@ TRUSTED_PROXY_COUNT=0
 
 | Variable | Qué debe colocar | Errores frecuentes |
 | --- | --- | --- |
-| `IMAGE_TAG` | `alpha` durante las pruebas. | Usar `latest` esperando una versión fija. |
+| `IMAGE_TAG` | `latest` normalmente; `beta` para validar novedades. | Usar `alpha`, que se conserva sólo como referencia histórica. |
 | `ADMIN_PASSWORD` | Contraseña única de 12+ caracteres. | Dejar el placeholder. Cambiarla en `.env` después del primer arranque no reemplaza la almacenada en `./config`. |
 | `SERVER_ENDPOINT` | IP pública o DNS como `vpn.example.com`. | Agregar `https://`, una ruta o `:51820`. El puerto se configura aparte. |
 | `SERVER_PORT` | Puerto UDP externo e interno, normalmente `51820`. | Abrir sólo TCP o usar un puerto diferente en el router y el cliente. |
