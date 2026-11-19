@@ -2,7 +2,7 @@
 
 ## Estado de la imagen publicada
 
-`beta` y `latest` usan la compilación mitigada con digest `sha256:588a5bfbbc105612dc320e3f558b5a5145efd56601bb337d9b1d57e9ef0a31d5`. El inventario, las mitigaciones y los hallazgos residuales reconocidos se mantienen en [`docs/CVE-ACKNOWLEDGEMENTS.md`](docs/CVE-ACKNOWLEDGEMENTS.md).
+`latest` apunta a `sha256:ea4a54ef5e61007c51ff44b034ceeed0afdcc9a7c5109c9f0afe78922f8ffc59` en Linux amd64. `beta` conserva el índice anterior, `sha256:588a5bfbbc105612dc320e3f558b5a5145efd56601bb337d9b1d57e9ef0a31d5`. El inventario y las mitigaciones están en el [informe de auditoría](docs/scout-audit/INFORME.md).
 
 `alpha` conserva intencionalmente una compilación histórica con vulnerabilidades conocidas y no debe desplegarse. Para instalaciones nuevas use `latest`; para despliegues críticos fije un digest que haya validado.
 

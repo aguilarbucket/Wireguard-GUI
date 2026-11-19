@@ -1,0 +1,705 @@
+[
+  {
+    "id": "CVE-2016-2781",
+    "uri": "https://security.alpinelinux.org/vuln/CVE-2016-2781",
+    "http": 200,
+    "v3_24": [
+      {
+        "package": "coreutils",
+        "branch": "3.24-main",
+        "version": "9.11-r0",
+        "status": "possibly vulnerable"
+      }
+    ],
+    "upstream_alpine": [
+      {
+        "package": "coreutils",
+        "branch": "edge-main",
+        "version": "9.11-r3",
+        "status": "possibly vulnerable"
+      },
+      {
+        "package": "coreutils",
+        "branch": "edge-main",
+        "version": "9.11-r2",
+        "status": "possibly vulnerable"
+      },
+      {
+        "package": "coreutils",
+        "branch": "edge-main",
+        "version": "9.11-r1",
+        "status": "possibly vulnerable"
+      },
+      {
+        "package": "coreutils",
+        "branch": "edge-main",
+        "version": "9.11-r0",
+        "status": "possibly vulnerable"
+      },
+      {
+        "package": "coreutils",
+        "branch": "edge-main",
+        "version": "9.10-r1",
+        "status": "possibly vulnerable"
+      },
+      {
+        "package": "coreutils",
+        "branch": "edge-main",
+        "version": "9.10-r0",
+        "status": "possibly vulnerable"
+      },
+      {
+        "package": "coreutils",
+        "branch": "edge-main",
+        "version": "9.9-r0",
+        "status": "possibly vulnerable"
+      },
+      {
+        "package": "coreutils",
+        "branch": "edge-main",
+        "version": "9.8-r1",
+        "status": "possibly vulnerable"
+      },
+      {
+        "package": "coreutils",
+        "branch": "edge-main",
+        "version": "9.8-r0",
+        "status": "possibly vulnerable"
+      },
+      {
+        "package": "coreutils",
+        "branch": "edge-main",
+        "version": "9.7-r1",
+        "status": "possibly vulnerable"
+      },
+      {
+        "package": "coreutils",
+        "branch": "edge-main",
+        "version": "9.7-r0",
+        "status": "possibly vulnerable"
+      },
+      {
+        "package": "coreutils",
+        "branch": "edge-main",
+        "version": "9.6-r2",
+        "status": "possibly vulnerable"
+      },
+      {
+        "package": "coreutils",
+        "branch": "edge-main",
+        "version": "9.6-r1",
+        "status": "possibly vulnerable"
+      },
+      {
+        "package": "coreutils",
+        "branch": "edge-main",
+        "version": "9.6-r0",
+        "status": "possibly vulnerable"
+      },
+      {
+        "package": "coreutils",
+        "branch": "edge-main",
+        "version": "9.5-r2",
+        "status": "possibly vulnerable"
+      },
+      {
+        "package": "coreutils",
+        "branch": "edge-main",
+        "version": "9.5-r1",
+        "status": "possibly vulnerable"
+      },
+      {
+        "package": "coreutils",
+        "branch": "edge-main",
+        "version": "9.4-r2",
+        "status": "possibly vulnerable"
+      },
+      {
+        "package": "coreutils",
+        "branch": "edge-main",
+        "version": "8.30-r0",
+        "status": "possibly vulnerable"
+      }
+    ]
+  },
+  {
+    "id": "CVE-2025-46836",
+    "uri": "https://security.alpinelinux.org/vuln/CVE-2025-46836",
+    "http": 200,
+    "v3_24": [
+      {
+        "package": "net-tools",
+        "branch": "3.24-main",
+        "version": "2.10-r3",
+        "status": "possibly vulnerable"
+      }
+    ],
+    "upstream_alpine": [
+      {
+        "package": "net-tools",
+        "branch": "edge-main",
+        "version": "2.10-r3",
+        "status": "possibly vulnerable"
+      }
+    ]
+  },
+  {
+    "id": "CVE-2026-107496",
+    "uri": "https://security.alpinelinux.org/vuln/CVE-2026-107496",
+    "http": 200,
+    "v3_24": [],
+    "upstream_alpine": [
+      {
+        "package": "openssl",
+        "branch": "edge-main",
+        "version": "3.5.9-r1",
+        "status": "fixed"
+      }
+    ]
+  },
+  {
+    "id": "CVE-2026-107891",
+    "uri": "https://security.alpinelinux.org/vuln/CVE-2026-107891",
+    "http": 200,
+    "v3_24": [
+      {
+        "package": "musl",
+        "branch": "3.24-main",
+        "version": "1.2.6-r3",
+        "status": "fixed"
+      }
+    ],
+    "upstream_alpine": [
+      {
+        "package": "musl",
+        "branch": "edge-main",
+        "version": "1.2.6-r6",
+        "status": "fixed"
+      }
+    ]
+  },
+  {
+    "id": "CVE-2026-119586",
+    "uri": "https://security.alpinelinux.org/vuln/CVE-2026-119586",
+    "http": 200,
+    "v3_24": [
+      {
+        "package": "sqlite",
+        "branch": "3.24-main",
+        "version": "3.53.4-r0",
+        "status": "possibly vulnerable"
+      },
+      {
+        "package": "sqlite",
+        "branch": "3.24-main",
+        "version": "3.53.2-r0",
+        "status": "possibly vulnerable"
+      }
+    ],
+    "upstream_alpine": [
+      {
+        "package": "sqlite",
+        "branch": "edge-main",
+        "version": "3.54.1-r0",
+        "status": "possibly vulnerable"
+      },
+      {
+        "package": "sqlite",
+        "branch": "edge-main",
+        "version": "3.54.0-r0",
+        "status": "possibly vulnerable"
+      },
+      {
+        "package": "sqlite",
+        "branch": "edge-main",
+        "version": "3.53.4-r0",
+        "status": "possibly vulnerable"
+      },
+      {
+        "package": "sqlite",
+        "branch": "edge-main",
+        "version": "3.53.3-r0",
+        "status": "possibly vulnerable"
+      },
+      {
+        "package": "sqlite",
+        "branch": "edge-main",
+        "version": "3.53.2-r0",
+        "status": "possibly vulnerable"
+      },
+      {
+        "package": "sqlite",
+        "branch": "edge-main",
+        "version": "3.53.1-r0",
+        "status": "possibly vulnerable"
+      },
+      {
+        "package": "sqlite",
+        "branch": "edge-main",
+        "version": "3.53.0-r0",
+        "status": "possibly vulnerable"
+      },
+      {
+        "package": "sqlite",
+        "branch": "edge-main",
+        "version": "3.51.2-r1",
+        "status": "possibly vulnerable"
+      },
+      {
+        "package": "sqlite",
+        "branch": "edge-main",
+        "version": "3.51.2-r0",
+        "status": "possibly vulnerable"
+      },
+      {
+        "package": "sqlite",
+        "branch": "edge-main",
+        "version": "3.51.1-r0",
+        "status": "possibly vulnerable"
+      },
+      {
+        "package": "sqlite",
+        "branch": "edge-main",
+        "version": "3.51.0-r0",
+        "status": "possibly vulnerable"
+      },
+      {
+        "package": "sqlite",
+        "branch": "edge-main",
+        "version": "3.50.4-r1",
+        "status": "possibly vulnerable"
+      },
+      {
+        "package": "sqlite",
+        "branch": "edge-main",
+        "version": "3.50.4-r0",
+        "status": "possibly vulnerable"
+      },
+      {
+        "package": "sqlite",
+        "branch": "edge-main",
+        "version": "3.50.3-r0",
+        "status": "possibly vulnerable"
+      },
+      {
+        "package": "sqlite",
+        "branch": "edge-main",
+        "version": "3.50.2-r0",
+        "status": "possibly vulnerable"
+      },
+      {
+        "package": "sqlite",
+        "branch": "edge-main",
+        "version": "3.50.1-r0",
+        "status": "possibly vulnerable"
+      },
+      {
+        "package": "sqlite",
+        "branch": "edge-main",
+        "version": "3.50.0-r0",
+        "status": "possibly vulnerable"
+      },
+      {
+        "package": "sqlite",
+        "branch": "edge-main",
+        "version": "3.49.2-r0",
+        "status": "possibly vulnerable"
+      },
+      {
+        "package": "sqlite",
+        "branch": "edge-main",
+        "version": "3.49.1-r1",
+        "status": "possibly vulnerable"
+      },
+      {
+        "package": "sqlite",
+        "branch": "edge-main",
+        "version": "3.49.1-r0",
+        "status": "possibly vulnerable"
+      },
+      {
+        "package": "sqlite",
+        "branch": "edge-main",
+        "version": "3.49.0-r1",
+        "status": "possibly vulnerable"
+      },
+      {
+        "package": "sqlite",
+        "branch": "edge-main",
+        "version": "3.49.0-r0",
+        "status": "possibly vulnerable"
+      },
+      {
+        "package": "sqlite",
+        "branch": "edge-main",
+        "version": "3.48.0-r1",
+        "status": "possibly vulnerable"
+      },
+      {
+        "package": "sqlite",
+        "branch": "edge-main",
+        "version": "3.48.0-r0",
+        "status": "possibly vulnerable"
+      },
+      {
+        "package": "sqlite",
+        "branch": "edge-main",
+        "version": "3.47.2-r0",
+        "status": "possibly vulnerable"
+      },
+      {
+        "package": "sqlite",
+        "branch": "edge-main",
+        "version": "3.47.1-r0",
+        "status": "possibly vulnerable"
+      },
+      {
+        "package": "sqlite",
+        "branch": "edge-main",
+        "version": "3.36.0-r0",
+        "status": "possibly vulnerable"
+      },
+      {
+        "package": "sqlite",
+        "branch": "edge-main",
+        "version": "3.34.1-r0",
+        "status": "possibly vulnerable"
+      },
+      {
+        "package": "sqlite",
+        "branch": "edge-main",
+        "version": "3.32.1-r0",
+        "status": "possibly vulnerable"
+      },
+      {
+        "package": "sqlite",
+        "branch": "edge-main",
+        "version": "3.30.1-r3",
+        "status": "possibly vulnerable"
+      },
+      {
+        "package": "sqlite",
+        "branch": "edge-main",
+        "version": "3.30.1-r1",
+        "status": "possibly vulnerable"
+      },
+      {
+        "package": "sqlite",
+        "branch": "edge-main",
+        "version": "3.28.0-r0",
+        "status": "possibly vulnerable"
+      }
+    ]
+  },
+  {
+    "id": "CVE-2026-56391",
+    "uri": "https://security.alpinelinux.org/vuln/CVE-2026-56391",
+    "http": 200,
+    "v3_24": [
+      {
+        "package": "coreutils",
+        "branch": "3.24-main",
+        "version": "9.11-r0",
+        "status": "possibly vulnerable"
+      }
+    ],
+    "upstream_alpine": [
+      {
+        "package": "coreutils",
+        "branch": "edge-main",
+        "version": "9.11-r3",
+        "status": "possibly vulnerable"
+      },
+      {
+        "package": "coreutils",
+        "branch": "edge-main",
+        "version": "9.11-r2",
+        "status": "possibly vulnerable"
+      },
+      {
+        "package": "coreutils",
+        "branch": "edge-main",
+        "version": "9.11-r1",
+        "status": "possibly vulnerable"
+      },
+      {
+        "package": "coreutils",
+        "branch": "edge-main",
+        "version": "9.11-r0",
+        "status": "possibly vulnerable"
+      },
+      {
+        "package": "coreutils",
+        "branch": "edge-main",
+        "version": "9.10-r1",
+        "status": "possibly vulnerable"
+      },
+      {
+        "package": "coreutils",
+        "branch": "edge-main",
+        "version": "9.10-r0",
+        "status": "possibly vulnerable"
+      },
+      {
+        "package": "coreutils",
+        "branch": "edge-main",
+        "version": "9.9-r0",
+        "status": "possibly vulnerable"
+      },
+      {
+        "package": "coreutils",
+        "branch": "edge-main",
+        "version": "9.8-r1",
+        "status": "possibly vulnerable"
+      },
+      {
+        "package": "coreutils",
+        "branch": "edge-main",
+        "version": "9.8-r0",
+        "status": "possibly vulnerable"
+      },
+      {
+        "package": "coreutils",
+        "branch": "edge-main",
+        "version": "9.7-r1",
+        "status": "possibly vulnerable"
+      },
+      {
+        "package": "coreutils",
+        "branch": "edge-main",
+        "version": "9.7-r0",
+        "status": "possibly vulnerable"
+      },
+      {
+        "package": "coreutils",
+        "branch": "edge-main",
+        "version": "9.6-r2",
+        "status": "possibly vulnerable"
+      },
+      {
+        "package": "coreutils",
+        "branch": "edge-main",
+        "version": "9.6-r1",
+        "status": "possibly vulnerable"
+      },
+      {
+        "package": "coreutils",
+        "branch": "edge-main",
+        "version": "9.6-r0",
+        "status": "possibly vulnerable"
+      },
+      {
+        "package": "coreutils",
+        "branch": "edge-main",
+        "version": "9.5-r2",
+        "status": "possibly vulnerable"
+      },
+      {
+        "package": "coreutils",
+        "branch": "edge-main",
+        "version": "9.5-r1",
+        "status": "possibly vulnerable"
+      }
+    ]
+  },
+  {
+    "id": "CVE-2026-56392",
+    "uri": "https://security.alpinelinux.org/vuln/CVE-2026-56392",
+    "http": 200,
+    "v3_24": [
+      {
+        "package": "coreutils",
+        "branch": "3.24-main",
+        "version": "9.11-r0",
+        "status": "possibly vulnerable"
+      }
+    ],
+    "upstream_alpine": [
+      {
+        "package": "coreutils",
+        "branch": "edge-main",
+        "version": "9.11-r3",
+        "status": "possibly vulnerable"
+      },
+      {
+        "package": "coreutils",
+        "branch": "edge-main",
+        "version": "9.11-r2",
+        "status": "possibly vulnerable"
+      },
+      {
+        "package": "coreutils",
+        "branch": "edge-main",
+        "version": "9.11-r1",
+        "status": "possibly vulnerable"
+      },
+      {
+        "package": "coreutils",
+        "branch": "edge-main",
+        "version": "9.11-r0",
+        "status": "possibly vulnerable"
+      },
+      {
+        "package": "coreutils",
+        "branch": "edge-main",
+        "version": "9.10-r1",
+        "status": "possibly vulnerable"
+      },
+      {
+        "package": "coreutils",
+        "branch": "edge-main",
+        "version": "9.10-r0",
+        "status": "possibly vulnerable"
+      },
+      {
+        "package": "coreutils",
+        "branch": "edge-main",
+        "version": "9.9-r0",
+        "status": "possibly vulnerable"
+      },
+      {
+        "package": "coreutils",
+        "branch": "edge-main",
+        "version": "9.8-r1",
+        "status": "possibly vulnerable"
+      },
+      {
+        "package": "coreutils",
+        "branch": "edge-main",
+        "version": "9.8-r0",
+        "status": "possibly vulnerable"
+      },
+      {
+        "package": "coreutils",
+        "branch": "edge-main",
+        "version": "9.7-r1",
+        "status": "possibly vulnerable"
+      },
+      {
+        "package": "coreutils",
+        "branch": "edge-main",
+        "version": "9.7-r0",
+        "status": "possibly vulnerable"
+      },
+      {
+        "package": "coreutils",
+        "branch": "edge-main",
+        "version": "9.6-r2",
+        "status": "possibly vulnerable"
+      },
+      {
+        "package": "coreutils",
+        "branch": "edge-main",
+        "version": "9.6-r1",
+        "status": "possibly vulnerable"
+      },
+      {
+        "package": "coreutils",
+        "branch": "edge-main",
+        "version": "9.6-r0",
+        "status": "possibly vulnerable"
+      },
+      {
+        "package": "coreutils",
+        "branch": "edge-main",
+        "version": "9.5-r2",
+        "status": "possibly vulnerable"
+      },
+      {
+        "package": "coreutils",
+        "branch": "edge-main",
+        "version": "9.5-r1",
+        "status": "possibly vulnerable"
+      },
+      {
+        "package": "coreutils",
+        "branch": "edge-main",
+        "version": "9.4-r2",
+        "status": "possibly vulnerable"
+      },
+      {
+        "package": "coreutils",
+        "branch": "edge-main",
+        "version": "8.30-r0",
+        "status": "possibly vulnerable"
+      }
+    ]
+  },
+  {
+    "id": "CVE-2026-88822",
+    "uri": "https://security.alpinelinux.org/vuln/CVE-2026-88822",
+    "http": 200,
+    "v3_24": [],
+    "upstream_alpine": [
+      {
+        "package": "openssl",
+        "branch": "edge-main",
+        "version": "3.5.9-r1",
+        "status": "fixed"
+      }
+    ]
+  },
+  {
+    "id": "CVE-2026-88823",
+    "uri": "https://security.alpinelinux.org/vuln/CVE-2026-88823",
+    "http": 200,
+    "v3_24": [],
+    "upstream_alpine": [
+      {
+        "package": "openssl",
+        "branch": "edge-main",
+        "version": "3.5.9-r1",
+        "status": "fixed"
+      }
+    ]
+  },
+  {
+    "id": "CVE-2026-95691",
+    "uri": "https://security.alpinelinux.org/vuln/CVE-2026-95691",
+    "http": 200,
+    "v3_24": [],
+    "upstream_alpine": [
+      {
+        "package": "openssl",
+        "branch": "edge-main",
+        "version": "3.5.9-r1",
+        "status": "fixed"
+      }
+    ]
+  },
+  {
+    "id": "CVE-2026-95692",
+    "uri": "https://security.alpinelinux.org/vuln/CVE-2026-95692",
+    "http": 200,
+    "v3_24": [],
+    "upstream_alpine": [
+      {
+        "package": "openssl",
+        "branch": "edge-main",
+        "version": "3.5.9-r1",
+        "status": "fixed"
+      }
+    ]
+  },
+  {
+    "id": "CVE-2026-96512",
+    "uri": "https://security.alpinelinux.org/vuln/CVE-2026-96512",
+    "http": 200,
+    "v3_24": [
+      {
+        "package": "sudo",
+        "branch": "3.24-community",
+        "version": "1.9.17_p2-r2",
+        "status": "fixed"
+      }
+    ],
+    "upstream_alpine": [
+      {
+        "package": "sudo",
+        "branch": "edge-community",
+        "version": "1.9.17_p2-r4",
+        "status": "fixed"
+      }
+    ]
+  }
+]

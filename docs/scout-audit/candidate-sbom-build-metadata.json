@@ -1,0 +1,70 @@
+{
+  "buildx.build.provenance": {
+    "builder": {
+      "id": ""
+    },
+    "buildType": "https://mobyproject.org/buildkit@v1",
+    "materials": [
+      {
+        "uri": "pkg:docker/docker/buildkit-syft-scanner?digest=sha256:873a7458c3c8ac8e32c7b796c10e1600b07b963d2aa000a72a2d97aaaa2d6315\u0026platform=linux%2Famd64",
+        "digest": {
+          "sha256": "873a7458c3c8ac8e32c7b796c10e1600b07b963d2aa000a72a2d97aaaa2d6315"
+        }
+      },
+      {
+        "uri": "pkg:docker/lscr.io/linuxserver/wireguard?digest=sha256:10db56ad834f94541307d5dfdbe87370e26d155bb341a5bf65789f970f24ab5c\u0026platform=linux%2Famd64",
+        "digest": {
+          "sha256": "10db56ad834f94541307d5dfdbe87370e26d155bb341a5bf65789f970f24ab5c"
+        }
+      }
+    ],
+    "invocation": {
+      "configSource": {
+        "entryPoint": "Dockerfile"
+      },
+      "parameters": {
+        "frontend": "dockerfile.v0",
+        "args": {
+          "build-arg:BUILD_DATE": "11/19/2026 00:25:23",
+          "build-arg:VERSION": "0.2.0-scout-remediation"
+        },
+        "locals": [
+          {
+            "name": "context"
+          },
+          {
+            "name": "dockerfile"
+          }
+        ],
+        "root": {
+          "configSource": {
+            "path": "Dockerfile"
+          },
+          "request": {
+            "args": {
+              "build-arg:BUILD_DATE": "11/19/2026 00:25:23",
+              "build-arg:VERSION": "0.2.0-scout-remediation",
+              "vcs:localdir:context": ".",
+              "vcs:localdir:dockerfile": ".",
+              "vcs:revision": "c0527df2c5a8de9d57c2b55c62575052386deb84",
+              "vcs:source": "https://github.com/aguilarbucket/Wireguard-GUI.git"
+            }
+          }
+        },
+        "compatibilityVersion": 30
+      },
+      "environment": {
+        "dockerfileVersion": "1.28.0",
+        "platform": "linux/amd64"
+      }
+    }
+  },
+  "buildx.build.ref": "desktop-linux/desktop-linux/5vpf4mmaqgemuxmaranbh2ipx",
+  "containerimage.descriptor": {
+    "mediaType": "application/vnd.oci.image.index.v1+json",
+    "digest": "sha256:ea4a54ef5e61007c51ff44b034ceeed0afdcc9a7c5109c9f0afe78922f8ffc59",
+    "size": 857
+  },
+  "containerimage.digest": "sha256:ea4a54ef5e61007c51ff44b034ceeed0afdcc9a7c5109c9f0afe78922f8ffc59",
+  "image.name": "docker.io/library/wireguard-gui:scout-remediation-sbom"
+}

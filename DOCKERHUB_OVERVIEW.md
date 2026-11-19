@@ -2,16 +2,16 @@
 
 Interfaz web ligera para administrar un servidor WireGuard sobre la imagen de [LinuxServer.io](https://github.com/linuxserver/docker-wireguard), con una experiencia inspirada en [wg-easy](https://github.com/wg-easy/wg-easy).
 
-> **Canales actuales: `latest` y `beta`**. Ambos contienen la compilación mitigada para `linux/amd64`. `alpha` se conserva únicamente como referencia histórica y no se recomienda para despliegues.
+> **`latest` contiene la versión auditada para Linux amd64.** `beta` conserva la compilación anterior. `alpha` es una referencia histórica.
 
-### Estado de seguridad verificado el 2026-11-15
+### Estado de seguridad verificado el 2026-11-18
 
-- `beta` / `latest`: **0 críticas, 3 altas, 3 medias y 1 baja** en 110 paquetes; además, 5 entradas OpenSSL todavía sin severidad asignada.
-- `alpha`: compilación histórica con **11 críticas, 51 altas, 45 medias y 11 bajas**. No debe utilizarse en producción.
-- Digest mitigado: `sha256:588a5bfbbc105612dc320e3f558b5a5145efd56601bb337d9b1d57e9ef0a31d5`.
-- La imagen incluye SBOM y provenance. Se eliminaron CoreDNS y herramientas de construcción del runtime.
+- Scout registró **0 críticas, 7 altas, 3 medias y 1 baja** en 108 paquetes de `latest`. La retirada de `net-tools` mitigó CVE-2025-46836.
+- El índice publicado es `sha256:ea4a54ef5e61007c51ff44b034ceeed0afdcc9a7c5109c9f0afe78922f8ffc59` e incluye SBOM y procedencia.
+- La imagen publicada superó las pruebas de GUI, API, túnel WireGuard y persistencia tras reinicio en Docker Desktop con Linux amd64.
+- `alpha` contiene **11 críticas, 51 altas, 45 medias y 11 bajas** según su inventario histórico.
 
-Los tres hallazgos altos residuales corresponden a musl, sudo y sqlite. Su aplicabilidad, las versiones verificadas y las medidas compensatorias están documentadas en el [reconocimiento de CVE y mitigaciones](https://github.com/aguilarbucket/Wireguard-GUI/blob/main/docs/CVE-ACKNOWLEDGEMENTS.md). Un CVE reconocido continúa bajo seguimiento; no significa que haya sido ocultado ni corregido.
+Alpine confirma dos backports ya instalados, en `musl` y `sudo`. Una alerta corresponde a la CLI SQLite, ausente de la imagen. Los ocho hallazgos de Coreutils y OpenSSL siguen pendientes de revisiones en Alpine v3.24 estable. [Informe de auditoría y evidencias](https://github.com/aguilarbucket/Wireguard-GUI/blob/main/docs/scout-audit/INFORME.md).
 
 ## Inicio rápido
 
@@ -65,7 +65,7 @@ services:
 ### `.env`
 
 ```dotenv
-# Canal recomendado. Use beta para validar novedades antes de latest.
+# Canal recomendado. beta conserva la versión anterior.
 IMAGE_TAG=latest
 
 # Obligatorio: use una frase única de al menos 12 caracteres; se recomiendan 16 o más.
@@ -108,7 +108,7 @@ TRUSTED_PROXY_COUNT=0
 
 | Variable | Qué debe colocar | Errores frecuentes |
 | --- | --- | --- |
-| `IMAGE_TAG` | `latest` normalmente; `beta` para validar novedades. | Usar `alpha`, que se conserva sólo como referencia histórica. |
+| `IMAGE_TAG` | `latest` normalmente; `beta` para volver a la versión anterior. | Usar `alpha`, que se conserva sólo como referencia histórica. |
 | `ADMIN_PASSWORD` | Contraseña única de 12+ caracteres. | Dejar el placeholder. Cambiarla en `.env` después del primer arranque no reemplaza la almacenada en `./config`. |
 | `SERVER_ENDPOINT` | IP pública o DNS como `vpn.example.com`. | Agregar `https://`, una ruta o `:51820`. El puerto se configura aparte. |
 | `SERVER_PORT` | Puerto UDP externo e interno, normalmente `51820`. | Abrir sólo TCP o usar un puerto diferente en el router y el cliente. |
@@ -202,7 +202,7 @@ docker compose up -d --no-build
 - La administración se publica sólo en `127.0.0.1` por defecto.
 - El contenedor utiliza `NET_ADMIN`, pero no requiere `privileged`, `SYS_ADMIN` ni el socket Docker.
 - `.env`, `./config`, claves y perfiles de clientes no forman parte de la imagen.
-- CVE reconocidos y mitigaciones: [docs/CVE-ACKNOWLEDGEMENTS.md](https://github.com/aguilarbucket/Wireguard-GUI/blob/main/docs/CVE-ACKNOWLEDGEMENTS.md).
+- [Auditoría, mitigaciones y evidencia](https://github.com/aguilarbucket/Wireguard-GUI/blob/main/docs/scout-audit/INFORME.md).
 - Código, documentación completa y reporte técnico: [github.com/aguilarbucket/Wireguard-GUI](https://github.com/aguilarbucket/Wireguard-GUI).
 - Base técnica: [LinuxServer/docker-wireguard](https://github.com/linuxserver/docker-wireguard).
 - Referencia funcional y de experiencia: [wg-easy](https://github.com/wg-easy/wg-easy).

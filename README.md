@@ -4,7 +4,7 @@ Interfaz web ligera y autocontenida para administrar un servidor WireGuard sobre
 
 > Estado: candidata técnica. La construcción, el arranque, la interfaz `wg0` y una conexión externa desde un cliente iOS sobre red móvil fueron verificados en Docker Desktop/WSL2. Valide igualmente el comportamiento en su propio router, proveedor de Internet y sistema operativo antes de usarlo en producción.
 
-> Seguridad de la imagen: `beta` y `latest` contienen la compilación mitigada; `alpha` es una referencia histórica con vulnerabilidades conocidas y no debe desplegarse. Consulte el [reconocimiento de CVE y mitigaciones](docs/CVE-ACKNOWLEDGEMENTS.md).
+> `latest` contiene la versión auditada de noviembre de 2026 para Linux amd64. `beta` conserva la versión anterior. Consulte el [informe de seguridad](docs/scout-audit/INFORME.md).
 
 ## Arquitectura
 
@@ -74,7 +74,7 @@ Edite `.env` antes del primer arranque. El archivo real está excluido de Git po
 
 | Variable | Valor recomendado | Descripción |
 | --- | --- | --- |
-| `IMAGE_TAG` | `latest` | Canal recomendado. Use `beta` para validar novedades; `alpha` queda sólo como referencia histórica. |
+| `IMAGE_TAG` | `latest` | Canal recomendado. `beta` conserva la versión anterior y `alpha` es histórico. |
 | `ADMIN_PASSWORD` | frase única de 16+ caracteres | Contraseña inicial de la GUI. Sólo se utiliza para inicializar un volumen nuevo. |
 | `SERVER_ENDPOINT` | `vpn.example.com` | IP pública o nombre DNS público del servidor, sin `http://`, `https://`, ruta ni puerto. |
 | `SERVER_PORT` | `51820` | Puerto UDP publicado por Docker, abierto en el firewall y reenviado por el router. |
@@ -134,7 +134,7 @@ docker compose logs --no-log-prefix wireguard-gui
 docker exec wireguard-gui wg show
 ```
 
-Imagen: [`alejandroromeroa/wireguard-gui`](https://hub.docker.com/r/alejandroromeroa/wireguard-gui). `IMAGE_TAG=latest` selecciona el canal recomendado y `IMAGE_TAG=beta` permite validar la misma compilación antes de futuras promociones. `alpha` se conserva únicamente como referencia histórica y no se recomienda para despliegues.
+`IMAGE_TAG=latest` selecciona la versión auditada. `IMAGE_TAG=beta` selecciona la versión anterior. `alpha` se conserva únicamente como referencia histórica. [Imagen en Docker Hub](https://hub.docker.com/r/alejandroromeroa/wireguard-gui).
 
 ### 5. Construir localmente
 

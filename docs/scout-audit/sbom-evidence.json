@@ -1,0 +1,30 @@
+{
+  "baseline": {
+    "platform": "linux/amd64",
+    "spdxPackages": 111,
+    "creators": [
+      "Organization: Anchore, Inc",
+      "Tool: syft-v1.51.0",
+      "Tool: buildkit-v0.34.2"
+    ],
+    "sha256": "edf4e36d905d82aaa74388d39db742153adfde2cf3cbd67d0b369f1bcfdcbd88"
+  },
+  "candidate": {
+    "index": "sha256:ea4a54ef5e61007c51ff44b034ceeed0afdcc9a7c5109c9f0afe78922f8ffc59",
+    "subject": {
+      "name": "pkg:docker/wireguard-gui@scout-remediation-sbom?platform=linux%2Famd64",
+      "digest": {
+        "sha256": "99b9c881d369a34d196176770ef1ade8dd26f80f6164f9585833fd1fd3e99fcd"
+      }
+    },
+    "attestation": "sha256:9124a3b23a7fb751505f4ba82a422066d52b1c2a77ae5e4010317f5ae962fc7d",
+    "statement": "sha256:48984d3ceec7f077b0c403ba909f95fb6cbca94c7ddd27bb2d5834f768df0f22",
+    "spdxPackages": 109,
+    "creators": [
+      "Organization: Anchore, Inc",
+      "Tool: syft-v1.51.0",
+      "Tool: buildkit-v0.34.2"
+    ],
+    "sha256": "af060ba38af3bad0e38586ce8776db96b802d8bcce0e3bb37f7d38cbbb085375"
+  }
+}

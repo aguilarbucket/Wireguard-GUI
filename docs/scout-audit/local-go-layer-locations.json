@@ -1,0 +1,16 @@
+[
+  {
+    "image": "baseline",
+    "goArtifacts": 178,
+    "path": "/usr/bin/coredns",
+    "layerDigest": "sha256:e6493aef4ae071e40805c1a4c79ae85ba27b48700c6cbfb8d044a20a52fdff30",
+    "layerDiffId": "sha256:771a30303caf735adea461e8097549997c74d2885f9c0bfaa2977a096ecb2c41"
+  },
+  {
+    "image": "candidate",
+    "goArtifacts": 178,
+    "path": "/usr/bin/coredns",
+    "layerDigest": "sha256:e6493aef4ae071e40805c1a4c79ae85ba27b48700c6cbfb8d044a20a52fdff30",
+    "layerDiffId": "sha256:771a30303caf735adea461e8097549997c74d2885f9c0bfaa2977a096ecb2c41"
+  }
+]

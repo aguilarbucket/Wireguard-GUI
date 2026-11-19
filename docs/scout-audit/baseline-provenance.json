@@ -1,0 +1,1076 @@
+{
+  "SLSA": {
+    "buildDefinition": {
+      "buildType": "https://github.com/moby/buildkit/blob/master/docs/attestations/slsa-definitions.md",
+      "externalParameters": {
+        "configSource": {
+          "path": "Dockerfile"
+        },
+        "request": {
+          "args": {
+            "build-arg:BUILD_DATE": "2026-11-15T13:21:06Z",
+            "build-arg:VCS_REF": "be9f708609188eb9a2af7f802deacd593ce47437",
+            "build-arg:VERSION": "0.2.0-beta"
+          },
+          "compatibilityVersion": 30,
+          "frontend": "dockerfile.v0",
+          "locals": [
+            {
+              "name": "context"
+            },
+            {
+              "name": "dockerfile"
+            }
+          ],
+          "root": {
+            "configSource": {
+              "path": "Dockerfile"
+            },
+            "request": {
+              "args": {
+                "build-arg:BUILD_DATE": "2026-11-15T13:21:06Z",
+                "build-arg:VCS_REF": "be9f708609188eb9a2af7f802deacd593ce47437",
+                "build-arg:VERSION": "0.2.0-beta",
+                "vcs:localdir:context": ".",
+                "vcs:localdir:dockerfile": ".",
+                "vcs:revision": "be9f708609188eb9a2af7f802deacd593ce47437",
+                "vcs:source": "https://github.com/aguilarbucket/Wireguard-GUI.git"
+              }
+            }
+          }
+        }
+      },
+      "internalParameters": {
+        "buildConfig": {
+          "digestMapping": {
+            "sha256:1553112db3b2c60b66bda3fcd8e2c3e6389a707b354fcc01f0eac907a964ab77": "step5",
+            "sha256:361bc8ea301dbc2fb4f7d5788b757cba25e4a743357ff72f423206bca8e4367f": "step0",
+            "sha256:38baa1eeef39bbb26a9e0fde3bcc5647a1db7677a264d4448a2c55daaf8b4327": "step4",
+            "sha256:453a045c67ddfb1721e00be7976f2ba0eb5a6c5e1927db6fdaa5559680e91c84": "step7",
+            "sha256:5b139024411aa1b0c919617b4a969b666c947d88e7d05630c7fae341cebdeaaa": "step10",
+            "sha256:834f2fb49464a914c17e5944e24ae8446b4a3d5d26a28991221c631c599ac569": "step1",
+            "sha256:8af0dc55a68fe36a1a01553f28e21586095085104525ca99c41b836268e5cd1a": "step9",
+            "sha256:91e3d5c3b3b6894d401da904ff5dfc32b0141e1a23aca0f7411f45886e4f6aa1": "step8",
+            "sha256:a31947a1409e9538bcf954090ad45c0057427c4df897a8f73dcb95afbbaa84af": "step2",
+            "sha256:abd37b26da49857377c037f608e5996ffdb942c58e32a4c71a02f118b0ca25d1": "step6",
+            "sha256:e4a9cf071df4fe7d01ee9e723e3c3e440d6618c509b51b117b0983b8fd785431": "step3"
+          },
+          "llbDefinition": [
+            {
+              "id": "step0",
+              "op": {
+                "Op": {
+                  "source": {
+                    "attrs": {
+                      "image.resolvemode": "pull"
+                    },
+                    "identifier": "docker-image://lscr.io/linuxserver/wireguard:latest@sha256:10db56ad834f94541307d5dfdbe87370e26d155bb341a5bf65789f970f24ab5c"
+                  }
+                },
+                "constraints": {},
+                "platform": {
+                  "Architecture": "amd64",
+                  "OS": "linux"
+                }
+              }
+            },
+            {
+              "id": "step1",
+              "inputs": [
+                "step0:0"
+              ],
+              "op": {
+                "Op": {
+                  "exec": {
+                    "meta": {
+                      "args": [
+                        "/bin/sh",
+                        "-c",
+                        "apk del coredns     \u0026\u0026 apk add --no-cache python3 sudo"
+                      ],
+                      "cwd": "/",
+                      "env": [
+                        "PATH=/lsiopy/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                        "PS1=$(whoami)@$(hostname):$(pwd)\\$ ",
+                        "HOME=/root",
+                        "TERM=xterm",
+                        "S6_CMD_WAIT_FOR_SERVICES_MAXTIME=0",
+                        "S6_VERBOSITY=1",
+                        "S6_STAGE2_HOOK=/docker-mods",
+                        "VIRTUAL_ENV=/lsiopy",
+                        "LSIO_FIRST_PARTY=true",
+                        "BUILD_DATE=2026-11-15T13:21:06Z",
+                        "VERSION=0.2.0-beta",
+                        "VCS_REF=be9f708609188eb9a2af7f802deacd593ce47437",
+                        "USE_COREDNS=false"
+                      ],
+                      "removeMountStubsRecursive": true
+                    },
+                    "mounts": [
+                      {
+                        "dest": "/"
+                      }
+                    ]
+                  }
+                },
+                "constraints": {},
+                "platform": {
+                  "Architecture": "amd64",
+                  "OS": "linux"
+                }
+              }
+            },
+            {
+              "id": "step2",
+              "inputs": [
+                "step0:0"
+              ],
+              "op": {
+                "Op": {
+                  "exec": {
+                    "meta": {
+                      "args": [
+                        "/bin/sh",
+                        "-c",
+                        "apk add --no-cache python3 py3-pip py3-virtualenv     \u0026\u0026 python3 -m venv /opt/wireguard-gui/venv"
+                      ],
+                      "cwd": "/",
+                      "env": [
+                        "PATH=/lsiopy/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                        "PS1=$(whoami)@$(hostname):$(pwd)\\$ ",
+                        "HOME=/root",
+                        "TERM=xterm",
+                        "S6_CMD_WAIT_FOR_SERVICES_MAXTIME=0",
+                        "S6_VERBOSITY=1",
+                        "S6_STAGE2_HOOK=/docker-mods",
+                        "VIRTUAL_ENV=/lsiopy",
+                        "LSIO_FIRST_PARTY=true"
+                      ],
+                      "removeMountStubsRecursive": true
+                    },
+                    "mounts": [
+                      {
+                        "dest": "/"
+                      }
+                    ]
+                  }
+                },
+                "constraints": {},
+                "platform": {
+                  "Architecture": "amd64",
+                  "OS": "linux"
+                }
+              }
+            },
+            {
+              "id": "step3",
+              "op": {
+                "Op": {
+                  "source": {
+                    "attrs": {
+                      "local.excludepatterns": "[\".git\",\".gitignore\",\".env\",\".env.*\",\"**/.env\",\"**/.env.*\",\".envrc\",\"*.local\",\".venv\",\"__pycache__\",\"*.pyc\",\".pytest_cache\",\".coverage\",\"htmlcov\",\"config\",\"docs\",\"tests\",\"secrets\",\"*.log\",\"logs\",\"test-results\",\"*.conf\",\"*.mobileconfig\",\"*.key\",\"*.pem\",\"*.p12\",\"*.pfx\",\"*.qr\",\"*.db\",\"*.sqlite\",\"*.sqlite3\",\"wireguard-gui-backup*\"]",
+                      "local.followpaths": "[\"docker/root\",\"requirements.txt\",\"wggui\"]",
+                      "local.sharedkeyhint": "context"
+                    },
+                    "identifier": "local://context"
+                  }
+                },
+                "constraints": {}
+              }
+            },
+            {
+              "id": "step4",
+              "inputs": [
+                "step2:0",
+                "step3:0"
+              ],
+              "op": {
+                "Op": {
+                  "file": {
+                    "actions": [
+                      {
+                        "Action": {
+                          "copy": {
+                            "allowEmptyWildcard": true,
+                            "allowWildcard": true,
+                            "createDestPath": true,
+                            "dest": "/opt/wireguard-gui/requirements.txt",
+                            "dirCopyContents": true,
+                            "followSymlink": true,
+                            "mode": -1,
+                            "src": "/requirements.txt",
+                            "timestamp": -1
+                          }
+                        },
+                        "input": 0,
+                        "output": 0,
+                        "secondaryInput": 1
+                      }
+                    ]
+                  }
+                },
+                "constraints": {}
+              }
+            },
+            {
+              "id": "step5",
+              "inputs": [
+                "step4:0"
+              ],
+              "op": {
+                "Op": {
+                  "exec": {
+                    "meta": {
+                      "args": [
+                        "/bin/sh",
+                        "-c",
+                        "/opt/wireguard-gui/venv/bin/pip install --no-cache-dir -r /opt/wireguard-gui/requirements.txt     \u0026\u0026 /opt/wireguard-gui/venv/bin/pip uninstall --yes pip setuptools"
+                      ],
+                      "cwd": "/",
+                      "env": [
+                        "PATH=/lsiopy/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                        "PS1=$(whoami)@$(hostname):$(pwd)\\$ ",
+                        "HOME=/root",
+                        "TERM=xterm",
+                        "S6_CMD_WAIT_FOR_SERVICES_MAXTIME=0",
+                        "S6_VERBOSITY=1",
+                        "S6_STAGE2_HOOK=/docker-mods",
+                        "VIRTUAL_ENV=/lsiopy",
+                        "LSIO_FIRST_PARTY=true"
+                      ],
+                      "removeMountStubsRecursive": true
+                    },
+                    "mounts": [
+                      {
+                        "dest": "/"
+                      }
+                    ]
+                  }
+                },
+                "constraints": {},
+                "platform": {
+                  "Architecture": "amd64",
+                  "OS": "linux"
+                }
+              }
+            },
+            {
+              "id": "step6",
+              "inputs": [
+                "step1:0",
+                "step5:0"
+              ],
+              "op": {
+                "Op": {
+                  "file": {
+                    "actions": [
+                      {
+                        "Action": {
+                          "copy": {
+                            "allowEmptyWildcard": true,
+                            "allowWildcard": true,
+                            "createDestPath": true,
+                            "dest": "/opt/wireguard-gui/venv",
+                            "dirCopyContents": true,
+                            "followSymlink": true,
+                            "mode": -1,
+                            "src": "/opt/wireguard-gui/venv",
+                            "timestamp": -1
+                          }
+                        },
+                        "input": 0,
+                        "output": 0,
+                        "secondaryInput": 1
+                      }
+                    ]
+                  }
+                },
+                "constraints": {}
+              }
+            },
+            {
+              "id": "step7",
+              "inputs": [
+                "step6:0",
+                "step3:0"
+              ],
+              "op": {
+                "Op": {
+                  "file": {
+                    "actions": [
+                      {
+                        "Action": {
+                          "copy": {
+                            "allowEmptyWildcard": true,
+                            "allowWildcard": true,
+                            "createDestPath": true,
+                            "dest": "/opt/wireguard-gui/wggui",
+                            "dirCopyContents": true,
+                            "followSymlink": true,
+                            "mode": -1,
+                            "src": "/wggui",
+                            "timestamp": -1
+                          }
+                        },
+                        "input": 0,
+                        "output": 0,
+                        "secondaryInput": 1
+                      }
+                    ]
+                  }
+                },
+                "constraints": {}
+              }
+            },
+            {
+              "id": "step8",
+              "inputs": [
+                "step7:0",
+                "step3:0"
+              ],
+              "op": {
+                "Op": {
+                  "file": {
+                    "actions": [
+                      {
+                        "Action": {
+                          "copy": {
+                            "allowEmptyWildcard": true,
+                            "allowWildcard": true,
+                            "createDestPath": true,
+                            "dest": "/",
+                            "dirCopyContents": true,
+                            "followSymlink": true,
+                            "mode": -1,
+                            "src": "/docker/root",
+                            "timestamp": -1
+                          }
+                        },
+                        "input": 0,
+                        "output": 0,
+                        "secondaryInput": 1
+                      }
+                    ]
+                  }
+                },
+                "constraints": {}
+              }
+            },
+            {
+              "id": "step9",
+              "inputs": [
+                "step8:0"
+              ],
+              "op": {
+                "Op": {
+                  "exec": {
+                    "meta": {
+                      "args": [
+                        "/bin/sh",
+                        "-c",
+                        "chmod +x       /etc/s6-overlay/s6-rc.d/init-wggui/run       /etc/s6-overlay/s6-rc.d/svc-wggui/run     \u0026\u0026 chmod 0440 /etc/sudoers.d/wggui"
+                      ],
+                      "cwd": "/",
+                      "env": [
+                        "PATH=/lsiopy/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                        "PS1=$(whoami)@$(hostname):$(pwd)\\$ ",
+                        "HOME=/root",
+                        "TERM=xterm",
+                        "S6_CMD_WAIT_FOR_SERVICES_MAXTIME=0",
+                        "S6_VERBOSITY=1",
+                        "S6_STAGE2_HOOK=/docker-mods",
+                        "VIRTUAL_ENV=/lsiopy",
+                        "LSIO_FIRST_PARTY=true",
+                        "BUILD_DATE=2026-11-15T13:21:06Z",
+                        "VERSION=0.2.0-beta",
+                        "VCS_REF=be9f708609188eb9a2af7f802deacd593ce47437",
+                        "USE_COREDNS=false"
+                      ],
+                      "removeMountStubsRecursive": true
+                    },
+                    "mounts": [
+                      {
+                        "dest": "/"
+                      }
+                    ]
+                  }
+                },
+                "constraints": {},
+                "platform": {
+                  "Architecture": "amd64",
+                  "OS": "linux"
+                }
+              }
+            },
+            {
+              "id": "step10",
+              "inputs": [
+                "step9:0"
+              ],
+              "op": {
+                "Op": {}
+              }
+            }
+          ]
+        },
+        "builderPlatform": "linux/amd64",
+        "dockerfileVersion": "1.28.0",
+        "targetPlatform": "linux/amd64"
+      },
+      "resolvedDependencies": [
+        {
+          "digest": {
+            "sha256": "873a7458c3c8ac8e32c7b796c10e1600b07b963d2aa000a72a2d97aaaa2d6315"
+          },
+          "uri": "pkg:docker/docker/buildkit-syft-scanner@stable-1?platform=linux%2Famd64"
+        },
+        {
+          "digest": {
+            "sha256": "10db56ad834f94541307d5dfdbe87370e26d155bb341a5bf65789f970f24ab5c"
+          },
+          "uri": "pkg:docker/lscr.io/linuxserver/wireguard@latest?platform=linux%2Famd64"
+        }
+      ]
+    },
+    "runDetails": {
+      "builder": {
+        "id": ""
+      },
+      "metadata": {
+        "buildkit_completeness": {
+          "request": true,
+          "resolvedDependencies": false
+        },
+        "buildkit_metadata": {
+          "layers": {
+            "step0:0": [
+              [
+                {
+                  "digest": "sha256:7970ef2aa55e0c5c0d8e6de65fc43820ec7ad65d6d950afc0d003b9f3105bd60",
+                  "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                  "size": 6266662
+                },
+                {
+                  "digest": "sha256:f6a4c3e338ed76d3e90c1ce7a15013a45c9b55febc952bc905eed245ce0bb8d2",
+                  "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                  "size": 6239
+                },
+                {
+                  "digest": "sha256:23b6a4730181bf0e1562b48132561e7e2d7a6f31514f67b319748fee75e49b7c",
+                  "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                  "size": 1360
+                },
+                {
+                  "digest": "sha256:01dcaa168b622d0b2cf02b1b020eca554ef18a97385b1d14eda3e5c68d765471",
+                  "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                  "size": 701
+                },
+                {
+                  "digest": "sha256:efc1a479174cc8fbce9f13bfbc982c63d605d4dff5cc3bfe037ba0b8294df000",
+                  "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                  "size": 428
+                },
+                {
+                  "digest": "sha256:d3ae61b552ec610566103aa606e7ce4b4a9258e8b68197f00c0579c7e2547381",
+                  "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                  "size": 6091146
+                },
+                {
+                  "digest": "sha256:e2a4e0d6c6f82772da017d808e4bc180d19e21d790064ec7d841f52d5871e07a",
+                  "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                  "size": 4630
+                },
+                {
+                  "digest": "sha256:e6493aef4ae071e40805c1a4c79ae85ba27b48700c6cbfb8d044a20a52fdff30",
+                  "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                  "size": 28339398
+                },
+                {
+                  "digest": "sha256:98efc71f1e51f2274688675ffb0049f29478949fbd12376e7251d750df2cefed",
+                  "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                  "size": 5003
+                }
+              ]
+            ],
+            "step1:0": [
+              [
+                {
+                  "digest": "sha256:7970ef2aa55e0c5c0d8e6de65fc43820ec7ad65d6d950afc0d003b9f3105bd60",
+                  "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                  "size": 6266662
+                },
+                {
+                  "digest": "sha256:f6a4c3e338ed76d3e90c1ce7a15013a45c9b55febc952bc905eed245ce0bb8d2",
+                  "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                  "size": 6239
+                },
+                {
+                  "digest": "sha256:23b6a4730181bf0e1562b48132561e7e2d7a6f31514f67b319748fee75e49b7c",
+                  "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                  "size": 1360
+                },
+                {
+                  "digest": "sha256:01dcaa168b622d0b2cf02b1b020eca554ef18a97385b1d14eda3e5c68d765471",
+                  "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                  "size": 701
+                },
+                {
+                  "digest": "sha256:efc1a479174cc8fbce9f13bfbc982c63d605d4dff5cc3bfe037ba0b8294df000",
+                  "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                  "size": 428
+                },
+                {
+                  "digest": "sha256:d3ae61b552ec610566103aa606e7ce4b4a9258e8b68197f00c0579c7e2547381",
+                  "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                  "size": 6091146
+                },
+                {
+                  "digest": "sha256:e2a4e0d6c6f82772da017d808e4bc180d19e21d790064ec7d841f52d5871e07a",
+                  "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                  "size": 4630
+                },
+                {
+                  "digest": "sha256:e6493aef4ae071e40805c1a4c79ae85ba27b48700c6cbfb8d044a20a52fdff30",
+                  "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                  "size": 28339398
+                },
+                {
+                  "digest": "sha256:98efc71f1e51f2274688675ffb0049f29478949fbd12376e7251d750df2cefed",
+                  "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                  "size": 5003
+                },
+                {
+                  "digest": "sha256:104fcad94eec563ab4c90a33ba1df9a6af52529152c855ed33f2d885ae40315d",
+                  "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                  "size": 19293022
+                }
+              ]
+            ],
+            "step6:0": [
+              [
+                {
+                  "digest": "sha256:7970ef2aa55e0c5c0d8e6de65fc43820ec7ad65d6d950afc0d003b9f3105bd60",
+                  "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                  "size": 6266662
+                },
+                {
+                  "digest": "sha256:f6a4c3e338ed76d3e90c1ce7a15013a45c9b55febc952bc905eed245ce0bb8d2",
+                  "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                  "size": 6239
+                },
+                {
+                  "digest": "sha256:23b6a4730181bf0e1562b48132561e7e2d7a6f31514f67b319748fee75e49b7c",
+                  "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                  "size": 1360
+                },
+                {
+                  "digest": "sha256:01dcaa168b622d0b2cf02b1b020eca554ef18a97385b1d14eda3e5c68d765471",
+                  "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                  "size": 701
+                },
+                {
+                  "digest": "sha256:efc1a479174cc8fbce9f13bfbc982c63d605d4dff5cc3bfe037ba0b8294df000",
+                  "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                  "size": 428
+                },
+                {
+                  "digest": "sha256:d3ae61b552ec610566103aa606e7ce4b4a9258e8b68197f00c0579c7e2547381",
+                  "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                  "size": 6091146
+                },
+                {
+                  "digest": "sha256:e2a4e0d6c6f82772da017d808e4bc180d19e21d790064ec7d841f52d5871e07a",
+                  "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                  "size": 4630
+                },
+                {
+                  "digest": "sha256:e6493aef4ae071e40805c1a4c79ae85ba27b48700c6cbfb8d044a20a52fdff30",
+                  "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                  "size": 28339398
+                },
+                {
+                  "digest": "sha256:98efc71f1e51f2274688675ffb0049f29478949fbd12376e7251d750df2cefed",
+                  "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                  "size": 5003
+                },
+                {
+                  "digest": "sha256:104fcad94eec563ab4c90a33ba1df9a6af52529152c855ed33f2d885ae40315d",
+                  "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                  "size": 19293022
+                },
+                {
+                  "digest": "sha256:ec00615d4702b2813df4c6ab774e2ba823c74c15aea42ae73e32081ce2e45388",
+                  "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                  "size": 2470982
+                }
+              ]
+            ],
+            "step7:0": [
+              [
+                {
+                  "digest": "sha256:7970ef2aa55e0c5c0d8e6de65fc43820ec7ad65d6d950afc0d003b9f3105bd60",
+                  "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                  "size": 6266662
+                },
+                {
+                  "digest": "sha256:f6a4c3e338ed76d3e90c1ce7a15013a45c9b55febc952bc905eed245ce0bb8d2",
+                  "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                  "size": 6239
+                },
+                {
+                  "digest": "sha256:23b6a4730181bf0e1562b48132561e7e2d7a6f31514f67b319748fee75e49b7c",
+                  "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                  "size": 1360
+                },
+                {
+                  "digest": "sha256:01dcaa168b622d0b2cf02b1b020eca554ef18a97385b1d14eda3e5c68d765471",
+                  "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                  "size": 701
+                },
+                {
+                  "digest": "sha256:efc1a479174cc8fbce9f13bfbc982c63d605d4dff5cc3bfe037ba0b8294df000",
+                  "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                  "size": 428
+                },
+                {
+                  "digest": "sha256:d3ae61b552ec610566103aa606e7ce4b4a9258e8b68197f00c0579c7e2547381",
+                  "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                  "size": 6091146
+                },
+                {
+                  "digest": "sha256:e2a4e0d6c6f82772da017d808e4bc180d19e21d790064ec7d841f52d5871e07a",
+                  "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                  "size": 4630
+                },
+                {
+                  "digest": "sha256:e6493aef4ae071e40805c1a4c79ae85ba27b48700c6cbfb8d044a20a52fdff30",
+                  "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                  "size": 28339398
+                },
+                {
+                  "digest": "sha256:98efc71f1e51f2274688675ffb0049f29478949fbd12376e7251d750df2cefed",
+                  "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                  "size": 5003
+                },
+                {
+                  "digest": "sha256:104fcad94eec563ab4c90a33ba1df9a6af52529152c855ed33f2d885ae40315d",
+                  "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                  "size": 19293022
+                },
+                {
+                  "digest": "sha256:ec00615d4702b2813df4c6ab774e2ba823c74c15aea42ae73e32081ce2e45388",
+                  "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                  "size": 2470982
+                },
+                {
+                  "digest": "sha256:7fda7c15df871bf665a07e0a3df0cdba7f4b13f17ea2acb1d74c58a28a1294b8",
+                  "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                  "size": 44969
+                }
+              ]
+            ],
+            "step8:0": [
+              [
+                {
+                  "digest": "sha256:7970ef2aa55e0c5c0d8e6de65fc43820ec7ad65d6d950afc0d003b9f3105bd60",
+                  "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                  "size": 6266662
+                },
+                {
+                  "digest": "sha256:f6a4c3e338ed76d3e90c1ce7a15013a45c9b55febc952bc905eed245ce0bb8d2",
+                  "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                  "size": 6239
+                },
+                {
+                  "digest": "sha256:23b6a4730181bf0e1562b48132561e7e2d7a6f31514f67b319748fee75e49b7c",
+                  "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                  "size": 1360
+                },
+                {
+                  "digest": "sha256:01dcaa168b622d0b2cf02b1b020eca554ef18a97385b1d14eda3e5c68d765471",
+                  "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                  "size": 701
+                },
+                {
+                  "digest": "sha256:efc1a479174cc8fbce9f13bfbc982c63d605d4dff5cc3bfe037ba0b8294df000",
+                  "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                  "size": 428
+                },
+                {
+                  "digest": "sha256:d3ae61b552ec610566103aa606e7ce4b4a9258e8b68197f00c0579c7e2547381",
+                  "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                  "size": 6091146
+                },
+                {
+                  "digest": "sha256:e2a4e0d6c6f82772da017d808e4bc180d19e21d790064ec7d841f52d5871e07a",
+                  "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                  "size": 4630
+                },
+                {
+                  "digest": "sha256:e6493aef4ae071e40805c1a4c79ae85ba27b48700c6cbfb8d044a20a52fdff30",
+                  "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                  "size": 28339398
+                },
+                {
+                  "digest": "sha256:98efc71f1e51f2274688675ffb0049f29478949fbd12376e7251d750df2cefed",
+                  "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                  "size": 5003
+                },
+                {
+                  "digest": "sha256:104fcad94eec563ab4c90a33ba1df9a6af52529152c855ed33f2d885ae40315d",
+                  "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                  "size": 19293022
+                },
+                {
+                  "digest": "sha256:ec00615d4702b2813df4c6ab774e2ba823c74c15aea42ae73e32081ce2e45388",
+                  "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                  "size": 2470982
+                },
+                {
+                  "digest": "sha256:7fda7c15df871bf665a07e0a3df0cdba7f4b13f17ea2acb1d74c58a28a1294b8",
+                  "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                  "size": 44969
+                },
+                {
+                  "digest": "sha256:b99bd239a12cc8c96535ccfa059b7580210e0d99283f2e8ea4a8816e20d33fa2",
+                  "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                  "size": 1115
+                }
+              ]
+            ],
+            "step9:0": [
+              [
+                {
+                  "digest": "sha256:7970ef2aa55e0c5c0d8e6de65fc43820ec7ad65d6d950afc0d003b9f3105bd60",
+                  "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                  "size": 6266662
+                },
+                {
+                  "digest": "sha256:f6a4c3e338ed76d3e90c1ce7a15013a45c9b55febc952bc905eed245ce0bb8d2",
+                  "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                  "size": 6239
+                },
+                {
+                  "digest": "sha256:23b6a4730181bf0e1562b48132561e7e2d7a6f31514f67b319748fee75e49b7c",
+                  "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                  "size": 1360
+                },
+                {
+                  "digest": "sha256:01dcaa168b622d0b2cf02b1b020eca554ef18a97385b1d14eda3e5c68d765471",
+                  "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                  "size": 701
+                },
+                {
+                  "digest": "sha256:efc1a479174cc8fbce9f13bfbc982c63d605d4dff5cc3bfe037ba0b8294df000",
+                  "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                  "size": 428
+                },
+                {
+                  "digest": "sha256:d3ae61b552ec610566103aa606e7ce4b4a9258e8b68197f00c0579c7e2547381",
+                  "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                  "size": 6091146
+                },
+                {
+                  "digest": "sha256:e2a4e0d6c6f82772da017d808e4bc180d19e21d790064ec7d841f52d5871e07a",
+                  "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                  "size": 4630
+                },
+                {
+                  "digest": "sha256:e6493aef4ae071e40805c1a4c79ae85ba27b48700c6cbfb8d044a20a52fdff30",
+                  "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                  "size": 28339398
+                },
+                {
+                  "digest": "sha256:98efc71f1e51f2274688675ffb0049f29478949fbd12376e7251d750df2cefed",
+                  "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                  "size": 5003
+                },
+                {
+                  "digest": "sha256:104fcad94eec563ab4c90a33ba1df9a6af52529152c855ed33f2d885ae40315d",
+                  "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                  "size": 19293022
+                },
+                {
+                  "digest": "sha256:ec00615d4702b2813df4c6ab774e2ba823c74c15aea42ae73e32081ce2e45388",
+                  "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                  "size": 2470982
+                },
+                {
+                  "digest": "sha256:7fda7c15df871bf665a07e0a3df0cdba7f4b13f17ea2acb1d74c58a28a1294b8",
+                  "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                  "size": 44969
+                },
+                {
+                  "digest": "sha256:b99bd239a12cc8c96535ccfa059b7580210e0d99283f2e8ea4a8816e20d33fa2",
+                  "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                  "size": 1115
+                },
+                {
+                  "digest": "sha256:21660c758513adb5c2781662fcea424b483b14f16deda773f8cbf82a2d17da6b",
+                  "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                  "size": 288
+                }
+              ]
+            ]
+          },
+          "source": {
+            "infos": [
+              {
+                "data": "QVJHIEJBU0VfSU1BR0U9bHNjci5pby9saW51eHNlcnZlci93aXJlZ3VhcmQ6bGF0ZXN0CkZST00gJHtCQVNFX0lNQUdFfSBBUyBweXRob24tYnVpbGRlcgoKUlVOIGFwayBhZGQgLS1uby1jYWNoZSBweXRob24zIHB5My1waXAgcHkzLXZpcnR1YWxlbnYgXAogICAgJiYgcHl0aG9uMyAtbSB2ZW52IC9vcHQvd2lyZWd1YXJkLWd1aS92ZW52CgpDT1BZIHJlcXVpcmVtZW50cy50eHQgL29wdC93aXJlZ3VhcmQtZ3VpL3JlcXVpcmVtZW50cy50eHQKUlVOIC9vcHQvd2lyZWd1YXJkLWd1aS92ZW52L2Jpbi9waXAgaW5zdGFsbCAtLW5vLWNhY2hlLWRpciAtciAvb3B0L3dpcmVndWFyZC1ndWkvcmVxdWlyZW1lbnRzLnR4dCBcCiAgICAmJiAvb3B0L3dpcmVndWFyZC1ndWkvdmVudi9iaW4vcGlwIHVuaW5zdGFsbCAtLXllcyBwaXAgc2V0dXB0b29scwoKRlJPTSAke0JBU0VfSU1BR0V9CgpBUkcgQlVJTERfREFURQpBUkcgVkVSU0lPTj0wLjIuMC1iZXRhCkFSRyBWQ1NfUkVGCkxBQkVMIG9yZy5vcGVuY29udGFpbmVycy5pbWFnZS50aXRsZT0iV2lyZUd1YXJkIEdVSSIgXAogICAgICBvcmcub3BlbmNvbnRhaW5lcnMuaW1hZ2UuZGVzY3JpcHRpb249IkludGVyZmF6IHdlYiBsaWdlcmEgcGFyYSBhZG1pbmlzdHJhciBXaXJlR3VhcmQgc29icmUgbGEgaW1hZ2VuIGRlIExpbnV4U2VydmVyLmlvIiBcCiAgICAgIG9yZy5vcGVuY29udGFpbmVycy5pbWFnZS52ZXJzaW9uPSIke1ZFUlNJT059IiBcCiAgICAgIG9yZy5vcGVuY29udGFpbmVycy5pbWFnZS5jcmVhdGVkPSIke0JVSUxEX0RBVEV9IiBcCiAgICAgIG9yZy5vcGVuY29udGFpbmVycy5pbWFnZS5yZXZpc2lvbj0iJHtWQ1NfUkVGfSIgXAogICAgICBvcmcub3BlbmNvbnRhaW5lcnMuaW1hZ2Uuc291cmNlPSJodHRwczovL2dpdGh1Yi5jb20vYWd1aWxhcmJ1Y2tldC9XaXJlZ3VhcmQtR1VJIiBcCiAgICAgIG9yZy5vcGVuY29udGFpbmVycy5pbWFnZS51cmw9Imh0dHBzOi8vZ2l0aHViLmNvbS9hZ3VpbGFyYnVja2V0L1dpcmVndWFyZC1HVUkiIFwKICAgICAgb3JnLm9wZW5jb250YWluZXJzLmltYWdlLmRvY3VtZW50YXRpb249Imh0dHBzOi8vZ2l0aHViLmNvbS9hZ3VpbGFyYnVja2V0L1dpcmVndWFyZC1HVUkjcmVhZG1lIiBcCiAgICAgIG9yZy5vcGVuY29udGFpbmVycy5pbWFnZS5saWNlbnNlcz0iR1BMLTMuMC1vbmx5IgoKIyBFc3RhIGFwbGljYWNpw7NuIGVudHJlZ2EgdW4gRE5TIGV4dGVybm8gYSBjYWRhIHBlZXIgeSBubyB1c2EgZWwgQ29yZUROUwojIG9wY2lvbmFsIGRlIExpbnV4U2VydmVyLiBSZXRpcmFybG8gZWxpbWluYSBzdXBlcmZpY2llIGRlIGF0YXF1ZSBubyB1dGlsaXphZGEuCkVOViBVU0VfQ09SRUROUz1mYWxzZQoKUlVOIGFwayBkZWwgY29yZWRucyBcCiAgICAmJiBhcGsgYWRkIC0tbm8tY2FjaGUgcHl0aG9uMyBzdWRvCgpDT1BZIC0tZnJvbT1weXRob24tYnVpbGRlciAvb3B0L3dpcmVndWFyZC1ndWkvdmVudiAvb3B0L3dpcmVndWFyZC1ndWkvdmVudgpDT1BZIHdnZ3VpIC9vcHQvd2lyZWd1YXJkLWd1aS93Z2d1aQpDT1BZIGRvY2tlci9yb290IC8KUlVOIGNobW9kICt4IFwKICAgICAgL2V0Yy9zNi1vdmVybGF5L3M2LXJjLmQvaW5pdC13Z2d1aS9ydW4gXAogICAgICAvZXRjL3M2LW92ZXJsYXkvczYtcmMuZC9zdmMtd2dndWkvcnVuIFwKICAgICYmIGNobW9kIDA0NDAgL2V0Yy9zdWRvZXJzLmQvd2dndWkKCkVYUE9TRSA1MTgyMC91ZHAgNTE4MjEvdGNwCg==",
+                "digestMapping": {
+                  "sha256:1411a7829182ae26bb48b057f37fa2a111370cd5d9dfe70d57240cf14272dd5f": "step1",
+                  "sha256:de33c327b3b7d496c5a2287007196cf5b3f8b1598d73fa4717f14e1810c55e10": "step0"
+                },
+                "filename": "Dockerfile",
+                "language": "Dockerfile",
+                "llbDefinition": [
+                  {
+                    "id": "step0",
+                    "op": {
+                      "Op": {
+                        "source": {
+                          "attrs": {
+                            "local.differ": "none",
+                            "local.followpaths": "[\"Dockerfile\",\"Dockerfile.dockerignore\",\"dockerfile\"]",
+                            "local.sharedkeyhint": "dockerfile"
+                          },
+                          "identifier": "local://dockerfile"
+                        }
+                      },
+                      "constraints": {}
+                    }
+                  },
+                  {
+                    "id": "step1",
+                    "inputs": [
+                      "step0:0"
+                    ],
+                    "op": {
+                      "Op": {}
+                    }
+                  }
+                ]
+              }
+            ],
+            "locations": {
+              "step0": {
+                "locations": [
+                  {
+                    "ranges": [
+                      {
+                        "end": {
+                          "line": 11
+                        },
+                        "start": {
+                          "line": 11
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "ranges": [
+                      {
+                        "end": {
+                          "line": 2
+                        },
+                        "start": {
+                          "line": 2
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              "step1": {
+                "locations": [
+                  {
+                    "ranges": [
+                      {
+                        "end": {
+                          "line": 30
+                        },
+                        "start": {
+                          "line": 30
+                        }
+                      },
+                      {
+                        "end": {
+                          "line": 31
+                        },
+                        "start": {
+                          "line": 31
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              "step2": {
+                "locations": [
+                  {
+                    "ranges": [
+                      {
+                        "end": {
+                          "line": 4
+                        },
+                        "start": {
+                          "line": 4
+                        }
+                      },
+                      {
+                        "end": {
+                          "line": 5
+                        },
+                        "start": {
+                          "line": 5
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              "step3": {},
+              "step4": {
+                "locations": [
+                  {
+                    "ranges": [
+                      {
+                        "end": {
+                          "line": 7
+                        },
+                        "start": {
+                          "line": 7
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              "step5": {
+                "locations": [
+                  {
+                    "ranges": [
+                      {
+                        "end": {
+                          "line": 8
+                        },
+                        "start": {
+                          "line": 8
+                        }
+                      },
+                      {
+                        "end": {
+                          "line": 9
+                        },
+                        "start": {
+                          "line": 9
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              "step6": {
+                "locations": [
+                  {
+                    "ranges": [
+                      {
+                        "end": {
+                          "line": 33
+                        },
+                        "start": {
+                          "line": 33
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              "step7": {
+                "locations": [
+                  {
+                    "ranges": [
+                      {
+                        "end": {
+                          "line": 34
+                        },
+                        "start": {
+                          "line": 34
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              "step8": {
+                "locations": [
+                  {
+                    "ranges": [
+                      {
+                        "end": {
+                          "line": 35
+                        },
+                        "start": {
+                          "line": 35
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              "step9": {
+                "locations": [
+                  {
+                    "ranges": [
+                      {
+                        "end": {
+                          "line": 36
+                        },
+                        "start": {
+                          "line": 36
+                        }
+                      },
+                      {
+                        "end": {
+                          "line": 37
+                        },
+                        "start": {
+                          "line": 37
+                        }
+                      },
+                      {
+                        "end": {
+                          "line": 38
+                        },
+                        "start": {
+                          "line": 38
+                        }
+                      },
+                      {
+                        "end": {
+                          "line": 39
+                        },
+                        "start": {
+                          "line": 39
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "vcs": {
+            "localdir:context": ".",
+            "localdir:dockerfile": ".",
+            "revision": "be9f708609188eb9a2af7f802deacd593ce47437",
+            "source": "https://github.com/aguilarbucket/Wireguard-GUI.git"
+          }
+        },
+        "finishedOn": "2026-11-15T13:21:33.046645011Z",
+        "invocationId": "kkiwc124g0rt8c4ie4j419nzn",
+        "startedOn": "2026-11-15T13:21:20.647499762Z"
+      }
+    }
+  }
+}

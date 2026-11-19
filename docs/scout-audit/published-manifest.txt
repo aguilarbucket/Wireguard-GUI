@@ -1,0 +1,15 @@
+Name:      docker.io/alejandroromeroa/wireguard-gui:latest
+MediaType: application/vnd.oci.image.index.v1+json
+Digest:    sha256:588a5bfbbc105612dc320e3f558b5a5145efd56601bb337d9b1d57e9ef0a31d5
+
+Manifests:
+  Name:        docker.io/alejandroromeroa/wireguard-gui:latest@sha256:7c0038b6b36f24ecbf17412d0f1ef3fcb0637e17fd431de36f2940156afb008f
+  MediaType:   application/vnd.oci.image.manifest.v1+json
+  Platform:    linux/amd64
+
+  Name:        docker.io/alejandroromeroa/wireguard-gui:latest@sha256:f89fd66e4f5cd8792cfd1c377943a1b1949c300542ba03284f24b178484de890
+  MediaType:   application/vnd.oci.image.manifest.v1+json
+  Platform:    unknown/unknown
+  Annotations:
+    vnd.docker.reference.digest: sha256:7c0038b6b36f24ecbf17412d0f1ef3fcb0637e17fd431de36f2940156afb008f
+    vnd.docker.reference.type:   attestation-manifest

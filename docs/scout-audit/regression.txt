@@ -1,0 +1,13 @@
+BROWSER msedge 157.0.4341.60
+IMAGE docker.io/alejandroromeroa/wireguard-gui@sha256:7c0038b6b36f24ecbf17412d0f1ef3fcb0637e17fd431de36f2940156afb008f
+PASS health, login, GUI assets and JavaScript, authenticated API, CSRF
+PASS create from GUI, config and QR, WireGuard handshake, ICMP 3/3 and traffic counters
+PASS enable and disable in kernel, restart with preserved state and key, client reconnection and peer deletion
+PASS browser JavaScript without page errors
+PASS isolated Docker resources removed
+IMAGE wireguard-gui@sha256:ea4a54ef5e61007c51ff44b034ceeed0afdcc9a7c5109c9f0afe78922f8ffc59
+PASS health, login, GUI assets and JavaScript, authenticated API, CSRF
+PASS create from GUI, config and QR, WireGuard handshake, ICMP 3/3 and traffic counters
+PASS enable and disable in kernel, restart with preserved state and key, client reconnection and peer deletion
+PASS browser JavaScript without page errors
+PASS isolated Docker resources removed

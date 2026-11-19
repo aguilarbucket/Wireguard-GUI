@@ -1,0 +1,17 @@
+....................                                                     [100%]
+=============================== tests coverage ================================
+_______________ coverage: platform win32, python 3.15.2-final-0 _______________
+
+Name                  Stmts   Miss  Cover
+-----------------------------------------
+wggui\__init__.py        44      2    95%
+wggui\auth.py            32      2    94%
+wggui\bootstrap.py       31      1    97%
+wggui\db.py              42      2    95%
+wggui\routes.py         124     15    88%
+wggui\security.py        61      3    95%
+wggui\validation.py      80     22    72%
+wggui\wireguard.py      189     39    79%
+-----------------------------------------
+TOTAL                   603     86    86%
+20 passed in 8.82s
